@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-oswald);
+  --animate-ken-burns: ken-burns 20s ease-in-out infinite alternate;
+  @keyframes ken-burns {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-right {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-slide-right: slide-right 0.8s ease-out forwards;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Global section title style — League Gothic, 64px, #004476 */
+.section-title {
+  font-family: var(--font-league-gothic), sans-serif;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #004476;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 36px;
+  }
+}
