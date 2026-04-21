@@ -3,6 +3,7 @@ import { Inter, Oswald, Open_Sans, League_Gothic } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { Analytics } from "@vercel/analytics/next";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </LenisProvider>
+        <Analytics />
       </body>
     </html>
   );
