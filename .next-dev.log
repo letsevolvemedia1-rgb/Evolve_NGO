@@ -12,3 +12,5 @@
 ○ Compiling / ...
  GET / 200 in 363ms (compile: 22ms, render: 341ms)
  POST /api/contact-submissions 200 in 4.1s (compile: 1208ms, render: 2.9s)
+  Reload env: .env.local
+ POST /api/contact-submissions 503 in 955ms (compile: 868ms, render: 87ms)
