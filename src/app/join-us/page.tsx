@@ -59,9 +59,49 @@ export default function JoinUsPage() {
         interest: "",
         message: "",
     });
+    const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+        type: "idle",
+        message: "",
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus({ type: "idle", message: "" });
+
+        try {
+            const response = await fetch("/api/engagement-inquiries", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = (await response.json()) as { error?: string };
+            if (!response.ok) {
+                throw new Error(result.error || "Unable to submit the form right now.");
+            }
+
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                interest: "",
+                message: "",
+            });
+            setStatus({ type: "success", message: "Thanks for registering your interest. We will contact you soon." });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Unable to submit the form right now.";
+            setStatus({ type: "error", message });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -139,12 +179,13 @@ export default function JoinUsPage() {
                             </p>
                         </div>
 
-                        <div className="px-6 py-6 space-y-4">
+                        <form onSubmit={handleSubmit} className="px-6 py-6 space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                     type="text"
                                     name="name"
                                     placeholder="Full Name *"
+                                    required
                                     value={formData.name}
                                     onChange={handleChange}
                                     className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
@@ -153,6 +194,7 @@ export default function JoinUsPage() {
                                     type="email"
                                     name="email"
                                     placeholder="Email Address *"
+                                    required
                                     value={formData.email}
                                     onChange={handleChange}
                                     className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
@@ -164,12 +206,14 @@ export default function JoinUsPage() {
                                     type="tel"
                                     name="phone"
                                     placeholder="Phone Number *"
+                                    required
                                     value={formData.phone}
                                     onChange={handleChange}
                                     className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
                                 />
                                 <select
                                     name="interest"
+                                    required
                                     value={formData.interest}
                                     onChange={handleChange}
                                     className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700 bg-white"
@@ -193,11 +237,21 @@ export default function JoinUsPage() {
                             />
 
                             <div className="text-center pt-2">
-                                <button className="bg-[#FF6B00] hover:bg-[#e06000] text-white font-bold uppercase text-sm px-10 py-3 rounded-sm transition-colors tracking-wider cursor-pointer">
-                                    SUBMIT
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="bg-[#FF6B00] hover:bg-[#e06000] text-white font-bold uppercase text-sm px-10 py-3 rounded-sm transition-colors tracking-wider cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+                                >
+                                    {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
                                 </button>
                             </div>
-                        </div>
+
+                            {status.type !== "idle" && (
+                                <p className={`text-sm text-center ${status.type === "success" ? "text-green-700" : "text-red-600"}`}>
+                                    {status.message}
+                                </p>
+                            )}
+                        </form>
                     </div>
                 </div>
             </section>

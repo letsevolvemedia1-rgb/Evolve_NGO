@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -12,16 +11,44 @@ export default function ContactUsPage() {
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+    type: "idle",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for contacting us!");
-    setFormData({ name: "", phone: "", email: "", message: "" });
+    setIsSubmitting(true);
+    setStatus({ type: "idle", message: "" });
+
+    try {
+      const response = await fetch("/api/contact-submissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit the form right now.");
+      }
+
+      setFormData({ name: "", phone: "", email: "", message: "" });
+      setStatus({ type: "success", message: "Thank you. Our team will get back to you shortly." });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to submit the form right now.";
+      setStatus({ type: "error", message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -36,15 +63,13 @@ export default function ContactUsPage() {
 
       <div className="container mx-auto px-4 md:px-12 py-12 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-
           <div className="space-y-12">
-
             <div>
               <h2 className="text-xl font-bold text-slate-900 uppercase mb-3">
                 For Corporate Partnerships
               </h2>
               <div className="text-base text-slate-600 space-y-1">
-                <p>Vishant – <span className="font-semibold">9664379981</span></p>
+                <p>Vishant - <span className="font-semibold">9151050779</span></p>
                 <a href="mailto:Info@Evolve.Org" className="text-[#0067A5] hover:underline">
                   Info@Evolve.Org
                 </a>
@@ -58,7 +83,7 @@ export default function ContactUsPage() {
                 <span className="text-lg text-slate-700">For New Donors</span>
               </h2>
               <div className="text-base text-slate-600 space-y-1">
-                <p>Vishant– <span className="font-semibold">9664379981</span></p>
+                <p>Prakarsh - <span className="font-semibold">9151050780</span></p>
                 <a href="mailto:Info@Evolve.Org" className="text-[#0067A5] hover:underline">
                   Info@Evolve.Org
                 </a>
@@ -75,7 +100,7 @@ export default function ContactUsPage() {
                 <p className="text-base text-slate-600 leading-relaxed">
                   3rd Floor, 13 Avantipuram, Kalyanpur, Kanpur - 208024
                   <br />
-                  <span className="font-semibold">Phone:</span> +91-9664379981, +91-7007017889
+                  <span className="font-semibold">Phone:</span> +91-9151050780, +91-9151050778
                   <br />
                   <span className="font-semibold">Email:</span> Info@Evolve.Org
                 </p>
@@ -88,7 +113,6 @@ export default function ContactUsPage() {
                 </p>
               </div>
             </div>
-
           </div>
 
           <div>
@@ -102,7 +126,6 @@ export default function ContactUsPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium text-slate-500">
                   Name <span className="text-red-500">*</span>
@@ -171,7 +194,7 @@ export default function ContactUsPage() {
               <div className="w-full h-[78px] bg-[#f9f9f9] border border-[#d3d3d3] rounded-[3px] flex items-center justify-between px-3 shadow-sm max-w-[304px]">
                 <div className="flex items-center gap-3">
                   <div className="w-[30px] h-[30px] border-2 border-[#c1c1c1] rounded-[2px] bg-white"></div>
-                  <span className="text-sm font-normal text-slate-700">I'm not a robot</span>
+                  <span className="text-sm font-normal text-slate-700">I&apos;m not a robot</span>
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1">
                   <Image src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" width={32} height={32} className="opacity-50" />
@@ -184,13 +207,19 @@ export default function ContactUsPage() {
 
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full bg-black hover:bg-slate-800 text-white font-bold py-6 rounded-sm uppercase tracking-wider text-sm transition-all"
               >
-                Submit
+                {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
+
+              {status.type !== "idle" && (
+                <p className={`text-sm ${status.type === "success" ? "text-green-700" : "text-red-600"}`}>
+                  {status.message}
+                </p>
+              )}
             </form>
           </div>
-
         </div>
       </div>
     </main>

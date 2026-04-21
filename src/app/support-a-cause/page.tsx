@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
 
 const campaigns = [
     {
@@ -59,6 +58,25 @@ function SupportACauseContent() {
     const [selectedAmount, setSelectedAmount] = useState<string>("5000");
     const [activeIndex, setActiveIndex] = useState(initialIndex);
     const [isPaused, setIsPaused] = useState(!!causeParam);
+    const [formData, setFormData] = useState({
+        otherAmount: "",
+        donorName: "",
+        email: "",
+        phone: "",
+        dateOfBirth: "",
+        panNumber: "",
+        country: "India",
+        state: "",
+        city: "",
+        address: "",
+        pincode: "",
+        consentToContact: false,
+    });
+    const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+        type: "idle",
+        message: "",
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Auto-advance campaign every 10 seconds unless paused
     useEffect(() => {
@@ -74,6 +92,73 @@ function SupportACauseContent() {
     // Handle user interaction with form to smartly pause rotation
     const handleInteraction = () => {
         if (!isPaused) setIsPaused(true);
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus({ type: "idle", message: "" });
+
+        const amountInr = formData.otherAmount.trim() || selectedAmount;
+
+        try {
+            const response = await fetch("/api/donation-intents", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    causeCode: currentCampaign.id,
+                    donorName: formData.donorName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    amountInr,
+                    dateOfBirth: formData.dateOfBirth,
+                    panNumber: formData.panNumber,
+                    country: formData.country,
+                    state: formData.state,
+                    city: formData.city,
+                    address: formData.address,
+                    pincode: formData.pincode,
+                    consentToContact: formData.consentToContact,
+                }),
+            });
+
+            const result = (await response.json()) as { error?: string };
+            if (!response.ok) {
+                throw new Error(result.error || "Unable to submit the donation form right now.");
+            }
+
+            setFormData({
+                otherAmount: "",
+                donorName: "",
+                email: "",
+                phone: "",
+                dateOfBirth: "",
+                panNumber: "",
+                country: "India",
+                state: "",
+                city: "",
+                address: "",
+                pincode: "",
+                consentToContact: false,
+            });
+            setSelectedAmount("5000");
+            setStatus({ type: "success", message: "Thank you. Our team will contact you to complete the donation." });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Unable to submit the donation form right now.";
+            setStatus({ type: "error", message });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const currentCampaign = campaigns[activeIndex];
@@ -169,7 +254,7 @@ function SupportACauseContent() {
                                 </p>
                             </div>
 
-                            <div className="px-6 py-6 space-y-5">
+                            <form onSubmit={handleSubmit} className="px-6 py-6 space-y-5">
                                 <div className="flex items-center justify-center gap-6 flex-wrap">
                                     {["5000", "10000", "15000"].map((amt) => (
                                         <label key={amt} className="flex items-center gap-2 cursor-pointer">
@@ -195,32 +280,35 @@ function SupportACauseContent() {
                                 <div className="space-y-3">
                                     <input
                                         type="text"
+                                        name="otherAmount"
                                         placeholder="Other Amount"
+                                        value={formData.otherAmount}
+                                        onChange={handleInputChange}
                                         className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
                                     />
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        <input type="text" placeholder="Enter Full Name" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
-                                        <input type="email" placeholder="Enter Email ID" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="text" name="donorName" placeholder="Enter Full Name" required value={formData.donorName} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="email" name="email" placeholder="Enter Email ID" required value={formData.email} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        <input type="tel" placeholder="Enter Mobile No" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
-                                        <input type="text" placeholder="DOB" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="tel" name="phone" placeholder="Enter Mobile No" required value={formData.phone} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        <input type="text" placeholder="Pan No" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
-                                        <input type="text" placeholder="India" disabled className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm bg-gray-50 text-slate-500" />
+                                        <input type="text" name="panNumber" placeholder="Pan No" value={formData.panNumber} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="text" name="country" placeholder="India" disabled value={formData.country} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm bg-gray-50 text-slate-500" />
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        <input type="text" placeholder="Select State" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
-                                        <input type="text" placeholder="City" className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="text" name="state" placeholder="Select State" value={formData.state} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                        <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleInputChange} className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
                                     </div>
 
-                                    <input type="text" placeholder="Address" className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
-                                    <input type="text" placeholder="Pincode" className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                    <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleInputChange} className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
+                                    <input type="text" name="pincode" placeholder="Pincode" value={formData.pincode} onChange={handleInputChange} className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700" />
                                 </div>
 
                                 <div className="bg-gray-50 px-4 py-3 rounded-sm text-center">
@@ -236,7 +324,7 @@ function SupportACauseContent() {
                                 </div>
 
                                 <label className="flex items-start gap-2 cursor-pointer">
-                                    <input type="checkbox" className="mt-0.5 w-4 h-4 accent-[#005089]" />
+                                    <input type="checkbox" name="consentToContact" checked={formData.consentToContact} onChange={handleInputChange} className="mt-0.5 w-4 h-4 accent-[#005089]" />
                                     <span className="text-[9px] md:text-[10px] text-slate-500 leading-relaxed">
                                         you agree that evolve sangh foundation can reach out to you
                                         through whatsapp/email/phone to provide information of
@@ -245,11 +333,17 @@ function SupportACauseContent() {
                                 </label>
 
                                 <div className="text-center">
-                                    <button className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider">
-                                        SUBMIT
+                                    <button type="submit" disabled={isSubmitting} className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider disabled:cursor-not-allowed disabled:opacity-70">
+                                        {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
                                     </button>
                                 </div>
-                            </div>
+
+                                {status.type !== "idle" && (
+                                    <p className={`text-sm text-center ${status.type === "success" ? "text-green-700" : "text-red-600"}`}>
+                                        {status.message}
+                                    </p>
+                                )}
+                            </form>
                         </div>
                     </div>
                 </div>

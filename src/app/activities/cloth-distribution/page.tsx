@@ -44,14 +44,11 @@ const focusPoints = [
 ];
 
 const glimpseImages = [
-  { src: "/Activity/Living2.svg", alt: "Cloth distribution activity 1" },
-  { src: "/Activity/Living3.svg", alt: "Cloth distribution activity 2" },
-  { src: "/Activity/Living2.svg", alt: "Cloth distribution activity 3" },
-  { src: "/Activity/Living3.svg", alt: "Cloth distribution activity 4" },
-  { src: "/Activity/Living2.svg", alt: "Cloth distribution activity 5" },
-  { src: "/Activity/Living3.svg", alt: "Cloth distribution activity 6" },
-  { src: "/Activity/Living2.svg", alt: "Cloth distribution activity 7" },
-  { src: "/Activity/Living3.svg", alt: "Cloth distribution activity 8" },
+  { src: "/ClothDistribution/Glimpses1.jpeg", alt: "Cloth distribution glimpse 1" },
+  { src: "/ClothDistribution/Glimpses2.jpeg", alt: "Cloth distribution glimpse 2" },
+  { src: "/ClothDistribution/Glimpses3.jpeg", alt: "Cloth distribution glimpse 3" },
+  { src: "/ClothDistribution/Glimpses4.jpeg", alt: "Cloth distribution glimpse 4" },
+  { src: "/ClothDistribution/Glimpses5.jpeg", alt: "Cloth distribution glimpse 5" },
 ];
 
 export default function ClothDistributionPage() {
