@@ -3,6 +3,27 @@ import { NextResponse } from "next/server";
 import { validateDonationIntent, isDatabaseConfigured } from "@/lib/form-submissions";
 import { prisma } from "@/lib/prisma";
 
+const campaignMetadata: Record<
+  string,
+  { slug: string; title: string; formTitle: string }
+> = {
+  education: {
+    slug: "siksha-na-ruke",
+    title: "SIKSHA NA RUKE",
+    formTitle: "DONATE TO SUPPORT EDUCATION",
+  },
+  food: {
+    slug: "hunger-free-night",
+    title: "HUNGER FREE NIGHT",
+    formTitle: "DONATE TO SUPPORT FOOD",
+  },
+  future: {
+    slug: "tyari-kal-ki",
+    title: "TYARI KAL KI",
+    formTitle: "DONATE TO SUPPORT FUTURE",
+  },
+};
+
 export async function POST(request: Request) {
   if (!isDatabaseConfigured()) {
     return NextResponse.json(
@@ -19,12 +40,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
-    const campaign = validation.data.causeCode
-      ? await prisma.campaign.findUnique({
-          where: { causeCode: validation.data.causeCode },
-          select: { id: true },
-        })
+    const campaignConfig = validation.data.causeCode
+      ? campaignMetadata[validation.data.causeCode]
       : null;
+
+    const campaign =
+      validation.data.causeCode && campaignConfig
+        ? await prisma.campaign.upsert({
+            where: { causeCode: validation.data.causeCode },
+            update: {
+              slug: campaignConfig.slug,
+              title: campaignConfig.title,
+              formTitle: campaignConfig.formTitle,
+            },
+            create: {
+              causeCode: validation.data.causeCode,
+              slug: campaignConfig.slug,
+              title: campaignConfig.title,
+              formTitle: campaignConfig.formTitle,
+            },
+            select: { id: true, title: true },
+          })
+        : null;
 
     await prisma.donationIntent.create({
       data: {
@@ -41,6 +78,7 @@ export async function POST(request: Request) {
         pincode: validation.data.pincode,
         consentToContact: validation.data.consentToContact,
         campaignId: campaign?.id ?? null,
+        campaignLabel: campaign?.title ?? campaignConfig?.title ?? null,
       },
     });
 

@@ -9,3 +9,6 @@
 
 ✓ Starting...
 ✓ Ready in 6.5s
+○ Compiling / ...
+ GET / 200 in 363ms (compile: 22ms, render: 341ms)
+ POST /api/contact-submissions 200 in 4.1s (compile: 1208ms, render: 2.9s)
