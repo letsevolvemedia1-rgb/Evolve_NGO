@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { TurnstileWidget } from "@/components/forms/TurnstileWidget";
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -16,6 +16,8 @@ export default function ContactUsPage() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -33,7 +35,10 @@ export default function ContactUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          captchaToken,
+        }),
       });
 
       const result = (await response.json()) as { error?: string };
@@ -47,6 +52,8 @@ export default function ContactUsPage() {
       const message = error instanceof Error ? error.message : "Unable to submit the form right now.";
       setStatus({ type: "error", message });
     } finally {
+      setCaptchaToken(null);
+      setCaptchaResetKey((prev) => prev + 1);
       setIsSubmitting(false);
     }
   };
@@ -191,23 +198,11 @@ export default function ContactUsPage() {
                 />
               </div>
 
-              <div className="w-full h-[78px] bg-[#f9f9f9] border border-[#d3d3d3] rounded-[3px] flex items-center justify-between px-3 shadow-sm max-w-[304px]">
-                <div className="flex items-center gap-3">
-                  <div className="w-[30px] h-[30px] border-2 border-[#c1c1c1] rounded-[2px] bg-white"></div>
-                  <span className="text-sm font-normal text-slate-700">I&apos;m not a robot</span>
-                </div>
-                <div className="flex flex-col items-center justify-center gap-1">
-                  <Image src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" width={32} height={32} className="opacity-50" />
-                  <span className="text-[10px] text-slate-500">reCAPTCHA</span>
-                  <div className="text-[8px] text-slate-400 leading-tight text-center">
-                    Privacy - Terms
-                  </div>
-                </div>
-              </div>
+              <TurnstileWidget onTokenChange={setCaptchaToken} resetKey={captchaResetKey} />
 
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !captchaToken}
                 className="w-full bg-black hover:bg-slate-800 text-white font-bold py-6 rounded-sm uppercase tracking-wider text-sm transition-all"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}

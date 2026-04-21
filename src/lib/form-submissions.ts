@@ -98,6 +98,11 @@ export function isDatabaseConfigured() {
   return Boolean(url && !url.includes("[YOUR-PASSWORD]"));
 }
 
+export function readCaptchaToken(payload: unknown) {
+  const input = payload as Record<string, unknown>;
+  return readString(input?.captchaToken);
+}
+
 export function validateContactSubmission(payload: unknown): ValidationResult<ContactSubmissionInput> {
   const input = payload as Record<string, unknown>;
   const name = readString(input?.name);

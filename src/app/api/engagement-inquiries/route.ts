@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 
-import { validateEngagementInquiry, isDatabaseConfigured } from "@/lib/form-submissions";
+import { readCaptchaToken, validateEngagementInquiry, isDatabaseConfigured } from "@/lib/form-submissions";
 import { prisma } from "@/lib/prisma";
+import { isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
 
 export async function POST(request: Request) {
   if (!isDatabaseConfigured()) {
     return NextResponse.json(
       { error: "Database is not configured yet. Set DATABASE_URL and DIRECT_URL first." },
+      { status: 503 },
+    );
+  }
+
+  if (!isTurnstileConfigured()) {
+    return NextResponse.json(
+      { error: "Captcha is not configured yet. Set Turnstile keys first." },
       { status: 503 },
     );
   }
@@ -17,6 +25,15 @@ export async function POST(request: Request) {
 
     if (!validation.ok) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    const captchaVerification = await verifyTurnstileToken(
+      readCaptchaToken(payload),
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+    );
+
+    if (!captchaVerification.ok) {
+      return NextResponse.json({ error: captchaVerification.error }, { status: 400 });
     }
 
     await prisma.engagementInquiry.create({

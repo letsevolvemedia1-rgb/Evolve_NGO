@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { TurnstileWidget } from "@/components/forms/TurnstileWidget";
 
 const campaigns = [
     {
@@ -77,6 +78,8 @@ function SupportACauseContent() {
         message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const [captchaResetKey, setCaptchaResetKey] = useState(0);
 
     // Auto-advance campaign every 10 seconds unless paused
     useEffect(() => {
@@ -129,6 +132,7 @@ function SupportACauseContent() {
                     address: formData.address,
                     pincode: formData.pincode,
                     consentToContact: formData.consentToContact,
+                    captchaToken,
                 }),
             });
 
@@ -157,6 +161,8 @@ function SupportACauseContent() {
             const message = error instanceof Error ? error.message : "Unable to submit the donation form right now.";
             setStatus({ type: "error", message });
         } finally {
+            setCaptchaToken(null);
+            setCaptchaResetKey((prev) => prev + 1);
             setIsSubmitting(false);
         }
     };
@@ -332,8 +338,10 @@ function SupportACauseContent() {
                                     </span>
                                 </label>
 
+                                <TurnstileWidget onTokenChange={setCaptchaToken} resetKey={captchaResetKey} />
+
                                 <div className="text-center">
-                                    <button type="submit" disabled={isSubmitting} className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider disabled:cursor-not-allowed disabled:opacity-70">
+                                    <button type="submit" disabled={isSubmitting || !captchaToken} className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider disabled:cursor-not-allowed disabled:opacity-70">
                                         {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
                                     </button>
                                 </div>

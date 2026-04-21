@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { TurnstileWidget } from "@/components/forms/TurnstileWidget";
 
 const waysToJoin = [
     {
@@ -64,6 +65,8 @@ export default function JoinUsPage() {
         message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const [captchaResetKey, setCaptchaResetKey] = useState(0);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -80,7 +83,10 @@ export default function JoinUsPage() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    ...formData,
+                    captchaToken,
+                }),
             });
 
             const result = (await response.json()) as { error?: string };
@@ -100,6 +106,8 @@ export default function JoinUsPage() {
             const message = error instanceof Error ? error.message : "Unable to submit the form right now.";
             setStatus({ type: "error", message });
         } finally {
+            setCaptchaToken(null);
+            setCaptchaResetKey((prev) => prev + 1);
             setIsSubmitting(false);
         }
     };
@@ -236,10 +244,12 @@ export default function JoinUsPage() {
                                 className="w-full border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700 resize-none"
                             />
 
+                            <TurnstileWidget onTokenChange={setCaptchaToken} resetKey={captchaResetKey} />
+
                             <div className="text-center pt-2">
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || !captchaToken}
                                     className="bg-[#FF6B00] hover:bg-[#e06000] text-white font-bold uppercase text-sm px-10 py-3 rounded-sm transition-colors tracking-wider cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
                                 >
                                     {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
