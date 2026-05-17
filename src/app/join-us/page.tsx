@@ -343,10 +343,10 @@ export default function JoinUsPage() {
           <p className="text-white text-xs md:text-sm font-medium">
             Have questions? Reach out to us at{" "}
             <a
-              href="mailto:letsevolve.offical@gmail.com"
+              href="mailto:letsevolve.official@gmail.com"
               className="underline hover:text-white/80"
             >
-              letsevolve.offical@gmail.com
+              letsevolve.official@gmail.com
             </a>
           </p>
           <Link

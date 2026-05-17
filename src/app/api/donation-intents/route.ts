@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { validateDonationIntent, isDatabaseConfigured } from "@/lib/form-submissions";
+import {
+  validateDonationIntent,
+  isDatabaseConfigured,
+} from "@/lib/form-submissions";
 import { prisma } from "@/lib/prisma";
 
 const campaignMetadata: Record<
@@ -19,19 +22,24 @@ const campaignMetadata: Record<
   },
   future: {
     slug: "tyari-kal-ki",
-    title: "TYARI KAL KI",
+    title: "Small Kits, Big Dreams",
     formTitle: "DONATE TO SUPPORT FUTURE",
   },
 };
 
 function isRazorpayConfigured() {
-  return Boolean(process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET);
+  return Boolean(
+    process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET,
+  );
 }
 
 export async function POST(request: Request) {
   if (!isRazorpayConfigured()) {
     return NextResponse.json(
-      { error: "Razorpay is not configured yet. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET first." },
+      {
+        error:
+          "Razorpay is not configured yet. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET first.",
+      },
       { status: 503 },
     );
   }
@@ -78,9 +86,15 @@ export async function POST(request: Request) {
       error?: { description?: string };
     };
 
-    if (!orderResponse.ok || !orderPayload.id || !orderPayload.amount || !orderPayload.currency) {
+    if (
+      !orderResponse.ok ||
+      !orderPayload.id ||
+      !orderPayload.amount ||
+      !orderPayload.currency
+    ) {
       const errorMessage =
-        orderPayload.error?.description ?? "Unable to create Razorpay order right now.";
+        orderPayload.error?.description ??
+        "Unable to create Razorpay order right now.";
       return NextResponse.json({ error: errorMessage }, { status: 502 });
     }
 
@@ -125,7 +139,10 @@ export async function POST(request: Request) {
           },
         });
       } catch (dbError) {
-        console.error("donation-intents DB write failed (non-blocking)", dbError);
+        console.error(
+          "donation-intents DB write failed (non-blocking)",
+          dbError,
+        );
       }
     }
 
@@ -135,10 +152,14 @@ export async function POST(request: Request) {
       orderId: orderPayload.id,
       amount: orderPayload.amount,
       currency: orderPayload.currency,
-      campaignTitle: persistedCampaignTitle ?? campaignConfig?.title ?? "Support a Cause",
+      campaignTitle:
+        persistedCampaignTitle ?? campaignConfig?.title ?? "Support a Cause",
     });
   } catch (error) {
     console.error("donation-intents POST failed", error);
-    return NextResponse.json({ error: "Unable to submit the form right now." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Unable to submit the form right now." },
+      { status: 500 },
+    );
   }
 }

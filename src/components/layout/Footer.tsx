@@ -222,7 +222,7 @@ export function Footer() {
                 <p className="text-[12px] text-white/80 mt-4">
                   <span className="font-bold text-white">Contact Us :</span> Ph
                   No. : +91 9151050780, +91 9151050778 | E-Mail:
-                  letsevolve.offical@gmail.com
+                  letsevolve.official@gmail.com
                 </p>
               </div>
 

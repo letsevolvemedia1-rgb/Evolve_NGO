@@ -91,10 +91,10 @@ export default function ContactUsPage() {
                   Vishant - <span className="font-semibold">9151050779</span>
                 </p>
                 <a
-                  href="mailto:letsevolve.offical@gmail.com"
+                  href="mailto:letsevolve.official@gmail.com"
                   className="text-[#0067A5] hover:underline"
                 >
-                  letsevolve.offical@gmail.com
+                  letsevolve.official@gmail.com
                 </a>
               </div>
             </div>
@@ -110,10 +110,10 @@ export default function ContactUsPage() {
                   Prakarsh - <span className="font-semibold">9151050780</span>
                 </p>
                 <a
-                  href="mailto:letsevolve.offical@gmail.com"
+                  href="mailto:letsevolve.official@gmail.com"
                   className="text-[#0067A5] hover:underline"
                 >
-                  letsevolve.offical@gmail.com
+                  letsevolve.official@gmail.com
                 </a>
               </div>
             </div>
@@ -134,7 +134,7 @@ export default function ContactUsPage() {
                   +91-9151050778
                   <br />
                   <span className="font-semibold">Email:</span>{" "}
-                  letsevolve.offical@gmail.com
+                  letsevolve.official@gmail.com
                 </p>
               </div>
 
