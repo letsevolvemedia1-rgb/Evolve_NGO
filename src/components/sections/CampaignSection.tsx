@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const campaigns = [
   {
-    title: "TYARI KAL\nKI",
+    title: "SMALL KITS,\nBIG DREAMS",
     desc: "Every young mind carries the potential to shape tomorrow. But for thousands of underprivileged youth in India, dreams are cut short due to lack of proper guidance, resources, and opportunities.",
     image: "/Homepage/Rectangle.png",
     url: "/support-a-cause?cause=future",
