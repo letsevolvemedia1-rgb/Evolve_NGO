@@ -2,47 +2,50 @@
 
 ## Deployment
 
-This project uses Next.js on Vercel with Prisma and Supabase Postgres.
+This project uses Next.js on Vercel with Prisma + Supabase, plus Razorpay for payments.
 
-### Required environment variables
+### Required Vercel environment variables
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `DATABASE_URL`
 - `DIRECT_URL`
+- `NEXT_PUBLIC_RAZORPAY_KEY_ID`
+- `RAZORPAY_KEY_ID`
+- `RAZORPAY_KEY_SECRET`
+
+### Optional environment variables
+
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+- `TURNSTILE_SECRET_KEY`
+- `ADMIN_USERS`
 
 ### Database URL setup
 
-- `DATABASE_URL` should use the Supabase pooled connection string for runtime on Vercel.
-- `DIRECT_URL` should use the direct Postgres connection string for Prisma migrations.
-- If your database password contains `@`, encode it as `%40` inside the URL.
+- `DATABASE_URL`: use Supabase pooled connection URL (runtime).
+- `DIRECT_URL`: use direct Postgres connection URL (migrations).
+- If password contains `@`, encode it as `%40`.
 
 ### Vercel build behavior
 
-The repo includes a Vercel build command that runs:
+Vercel build command is:
 
 ```bash
-npm run build:vercel
+npm run build
 ```
 
-That expands to:
+It expands to:
 
 ```bash
-prisma generate && prisma migrate deploy && next build
+prisma generate && next build
 ```
 
-### First production rollout
+This avoids migration-time deployment failures during build.
 
-1. Add the environment variables in Vercel for Production.
-2. Make sure `DATABASE_URL` points to the pooled Supabase URL.
-3. Make sure `DIRECT_URL` points to the direct Supabase Postgres URL.
-4. Push the repo with the committed `prisma/migrations` folder.
-5. Redeploy on Vercel.
+### Run migrations
 
-### Local Prisma commands
+Run migrations separately when needed:
 
 ```bash
-npm run prisma:generate
-npm run db:migrate:dev
 npm run db:migrate:deploy
 ```
