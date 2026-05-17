@@ -2,7 +2,14 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { TurnstileWidget } from "@/components/forms/TurnstileWidget";
+
+declare global {
+    interface Window {
+        Razorpay?: new (options: Record<string, unknown>) => {
+            open: () => void;
+        };
+    }
+}
 
 const campaigns = [
     {
@@ -78,8 +85,38 @@ function SupportACauseContent() {
         message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-    const [captchaResetKey, setCaptchaResetKey] = useState(0);
+    const amountInr = formData.otherAmount.trim() || selectedAmount;
+    const parsedAmount = Number(amountInr.toString().replace(/,/g, ""));
+    const formattedAmount = Number.isFinite(parsedAmount) && parsedAmount > 0
+        ? `Rs ${parsedAmount.toLocaleString()}`
+        : "Rs 0";
+
+    const loadRazorpayScript = () =>
+        new Promise<boolean>((resolve) => {
+            if (typeof window === "undefined") {
+                resolve(false);
+                return;
+            }
+
+            if (window.Razorpay) {
+                resolve(true);
+                return;
+            }
+
+            const existingScript = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+            if (existingScript) {
+                existingScript.addEventListener("load", () => resolve(true), { once: true });
+                existingScript.addEventListener("error", () => resolve(false), { once: true });
+                return;
+            }
+
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
 
     // Auto-advance campaign every 10 seconds unless paused
     useEffect(() => {
@@ -110,8 +147,6 @@ function SupportACauseContent() {
         setIsSubmitting(true);
         setStatus({ type: "idle", message: "" });
 
-        const amountInr = formData.otherAmount.trim() || selectedAmount;
-
         try {
             const response = await fetch("/api/donation-intents", {
                 method: "POST",
@@ -132,14 +167,59 @@ function SupportACauseContent() {
                     address: formData.address,
                     pincode: formData.pincode,
                     consentToContact: formData.consentToContact,
-                    captchaToken,
                 }),
             });
 
-            const result = (await response.json()) as { error?: string };
+            const result = (await response.json()) as {
+                error?: string;
+                razorpayKeyId?: string;
+                orderId?: string;
+                amount?: number;
+                currency?: string;
+                campaignTitle?: string;
+            };
             if (!response.ok) {
                 throw new Error(result.error || "Unable to submit the donation form right now.");
             }
+
+            if (!result.razorpayKeyId || !result.orderId || !result.amount || !result.currency) {
+                throw new Error("Payment initialization failed. Please try again.");
+            }
+
+            const razorpayLoaded = await loadRazorpayScript();
+            if (!razorpayLoaded || !window.Razorpay) {
+                throw new Error("Unable to load Razorpay checkout. Please check your internet and try again.");
+            }
+
+            const razorpay = new window.Razorpay({
+                key: result.razorpayKeyId,
+                amount: result.amount,
+                currency: result.currency,
+                name: "Evolve Sangh Foundation",
+                description: `${result.campaignTitle || "Support a Cause Donation"} - Rs ${Math.round(result.amount / 100).toLocaleString()}`,
+                order_id: result.orderId,
+                prefill: {
+                    name: formData.donorName,
+                    email: formData.email,
+                    contact: formData.phone,
+                },
+                notes: {
+                    causeCode: currentCampaign.id,
+                },
+                theme: {
+                    color: "#005089",
+                },
+                handler: () => {
+                    setStatus({ type: "success", message: "Payment successful. Thank you for your donation." });
+                },
+                modal: {
+                    ondismiss: () => {
+                        setStatus({ type: "error", message: "Payment was cancelled before completion." });
+                    },
+                },
+            });
+
+            razorpay.open();
 
             setFormData({
                 otherAmount: "",
@@ -156,13 +236,13 @@ function SupportACauseContent() {
                 consentToContact: false,
             });
             setSelectedAmount("5000");
-            setStatus({ type: "success", message: "Thank you. Our team will contact you to complete the donation." });
+            if (status.type === "idle") {
+                setStatus({ type: "success", message: "Redirecting to payment..." });
+            }
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unable to submit the donation form right now.";
             setStatus({ type: "error", message });
         } finally {
-            setCaptchaToken(null);
-            setCaptchaResetKey((prev) => prev + 1);
             setIsSubmitting(false);
         }
     };
@@ -338,11 +418,9 @@ function SupportACauseContent() {
                                     </span>
                                 </label>
 
-                                <TurnstileWidget onTokenChange={setCaptchaToken} resetKey={captchaResetKey} />
-
                                 <div className="text-center">
-                                    <button type="submit" disabled={isSubmitting || !captchaToken} className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider disabled:cursor-not-allowed disabled:opacity-70">
-                                        {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
+                                    <button type="submit" disabled={isSubmitting} className="bg-[#8cc63f] hover:bg-[#7cb036] text-white font-bold uppercase text-sm px-8 py-3 rounded-sm transition-colors cursor-pointer tracking-wider disabled:cursor-not-allowed disabled:opacity-70">
+                                        {isSubmitting ? "PROCESSING..." : `DONATE ${formattedAmount}`}
                                     </button>
                                 </div>
 

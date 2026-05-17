@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Oswald, Open_Sans, League_Gothic } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { Chrome } from "@/components/layout/Chrome";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import "lenis/dist/lenis.css";
 import "./globals.css";
@@ -44,9 +43,7 @@ export default function RootLayout({
         className={`${inter.variable} ${oswald.variable} ${openSans.variable} ${leagueGothic.variable} antialiased font-sans`}
       >
         <LenisProvider>
-          <Header />
-          {children}
-          <Footer />
+          <Chrome>{children}</Chrome>
         </LenisProvider>
       </body>
     </html>

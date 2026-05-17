@@ -11,7 +11,10 @@ export default function ContactUsPage() {
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+  const [status, setStatus] = useState<{
+    type: "idle" | "success" | "error";
+    message: string;
+  }>({
     type: "idle",
     message: "",
   });
@@ -19,7 +22,9 @@ export default function ContactUsPage() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaResetKey, setCaptchaResetKey] = useState(0);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -47,9 +52,15 @@ export default function ContactUsPage() {
       }
 
       setFormData({ name: "", phone: "", email: "", message: "" });
-      setStatus({ type: "success", message: "Thank you. Our team will get back to you shortly." });
+      setStatus({
+        type: "success",
+        message: "Thank you. Our team will get back to you shortly.",
+      });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to submit the form right now.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to submit the form right now.";
       setStatus({ type: "error", message });
     } finally {
       setCaptchaToken(null);
@@ -76,9 +87,14 @@ export default function ContactUsPage() {
                 For Corporate Partnerships
               </h2>
               <div className="text-base text-slate-600 space-y-1">
-                <p>Vishant - <span className="font-semibold">9151050779</span></p>
-                <a href="mailto:Info@Evolve.Org" className="text-[#0067A5] hover:underline">
-                  Info@Evolve.Org
+                <p>
+                  Vishant - <span className="font-semibold">9151050779</span>
+                </p>
+                <a
+                  href="mailto:letsevolve.offical@gmail.com"
+                  className="text-[#0067A5] hover:underline"
+                >
+                  letsevolve.offical@gmail.com
                 </a>
               </div>
             </div>
@@ -90,9 +106,14 @@ export default function ContactUsPage() {
                 <span className="text-lg text-slate-700">For New Donors</span>
               </h2>
               <div className="text-base text-slate-600 space-y-1">
-                <p>Prakarsh - <span className="font-semibold">9151050780</span></p>
-                <a href="mailto:Info@Evolve.Org" className="text-[#0067A5] hover:underline">
-                  Info@Evolve.Org
+                <p>
+                  Prakarsh - <span className="font-semibold">9151050780</span>
+                </p>
+                <a
+                  href="mailto:letsevolve.offical@gmail.com"
+                  className="text-[#0067A5] hover:underline"
+                >
+                  letsevolve.offical@gmail.com
                 </a>
               </div>
             </div>
@@ -103,18 +124,24 @@ export default function ContactUsPage() {
               </h2>
 
               <div className="mb-6">
-                <h3 className="text-base font-bold text-slate-800 uppercase mb-2">Head Office</h3>
+                <h3 className="text-base font-bold text-slate-800 uppercase mb-2">
+                  Head Office
+                </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
                   3rd Floor, 13 Avantipuram, Kalyanpur, Kanpur - 208024
                   <br />
-                  <span className="font-semibold">Phone:</span> +91-9151050780, +91-9151050778
+                  <span className="font-semibold">Phone:</span> +91-9151050780,
+                  +91-9151050778
                   <br />
-                  <span className="font-semibold">Email:</span> Info@Evolve.Org
+                  <span className="font-semibold">Email:</span>{" "}
+                  letsevolve.offical@gmail.com
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-slate-800 uppercase mb-2">Regd. Office:</h3>
+                <h3 className="text-base font-bold text-slate-800 uppercase mb-2">
+                  Regd. Office:
+                </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
                   233D- Lakhanpur Housing Society, Awadhpuri, Kanpur - 208024
                 </p>
@@ -134,7 +161,10 @@ export default function ContactUsPage() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-slate-500">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-slate-500"
+                >
                   Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -151,7 +181,10 @@ export default function ContactUsPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium text-slate-500">
+                  <label
+                    htmlFor="phone"
+                    className="text-sm font-medium text-slate-500"
+                  >
                     Phone <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -166,7 +199,10 @@ export default function ContactUsPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-slate-500">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-slate-500"
+                  >
                     Email <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -183,7 +219,10 @@ export default function ContactUsPage() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-slate-500">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-slate-500"
+                >
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -198,7 +237,10 @@ export default function ContactUsPage() {
                 />
               </div>
 
-              <TurnstileWidget onTokenChange={setCaptchaToken} resetKey={captchaResetKey} />
+              <TurnstileWidget
+                onTokenChange={setCaptchaToken}
+                resetKey={captchaResetKey}
+              />
 
               <Button
                 type="submit"
@@ -209,7 +251,9 @@ export default function ContactUsPage() {
               </Button>
 
               {status.type !== "idle" && (
-                <p className={`text-sm ${status.type === "success" ? "text-green-700" : "text-red-600"}`}>
+                <p
+                  className={`text-sm ${status.type === "success" ? "text-green-700" : "text-red-600"}`}
+                >
                   {status.message}
                 </p>
               )}
