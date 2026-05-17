@@ -17,22 +17,30 @@ const campaigns = [
     heroImage: "/new/Education/Slider.png",
     overlayTop: "EDUCATION",
     overlayBottom: "IS EMPOWERMENT",
-    title: "SIKSHA NA RUKE",
-    formTitle: "DONATE TO SUPPORT EDUCATION",
+    title: "Small Kits, Big Dreams",
+    formTitle: "DONATE TO SUPPORT FUTURE",
     paragraphs: [
-      "Education is the most powerful tool to break the cycle of poverty. Yet, millions of children in India are forced to drop out of school because of financial hardships, lack of resources, or family struggles. For them, a missed year of education often means a lifetime of lost opportunities.",
+      "Every young mind carries the potential to shape tomorrow. But for thousands of underprivileged youth in India, dreams are cut short due to lack of proper guidance, resources, and opportunities. Without the right support, many talented students are unable to compete in today's world, leaving their future uncertain.",
       <>
         Evolve Sangh Foundation&apos;s{" "}
-        <strong>&apos;Siksha Na Ruke&apos;</strong> campaign is committed to
-        ensuring that every child continues their learning journey, no matter
-        their circumstances. From distributing school kits, books, and uniforms
-        to supporting school fees and remedial classes, we are keeping the flame
-        of education alive for children in need.
+        <strong>&apos;Small Kits, Big Dreams&apos;</strong> campaign, we are
+        preparing these young dreamers for a brighter tomorrow. By providing
+        career counseling, mentorship, skill development training, and academic
+        support, we ensure that no talent goes unnoticed and no dream remains
+        unfulfilled.
       </>,
-      "But the challenge is immense. Your support can ensure that a child does not have to give up their classroom for child labor, or their books for survival. By contributing to Siksha Na Ruke, you are giving the gift of knowledge, confidence, and a brighter tomorrow.",
       <>
-         <strong>Donate now.</strong> Because when education continues, hope
-        never stops.
+        <strong>But we cannot do this alone.</strong> Your support can help a
+        student take their first confident step towards a successful future. By
+        contributing to Small Kits, Big Dreams, you are not just empowering an
+        individual, you are uplifting an entire family and shaping India&apos;s
+        future leaders.
+      </>,
+      <>
+        <span className="text-[#005089] font-semibold">
+          <strong>Donate today</strong> and be the reason a student dares to
+          dream bigger. Together, we can prepare them for tomorrow.
+        </span>
       </>,
     ],
   },
@@ -75,30 +83,22 @@ const campaigns = [
     heroImage: "/SkillDev/Slider2.png",
     overlayTop: "SKILLS THAT SHINE",
     overlayBottom: "FUTURES DEFINED",
-    title: "Small Kits, Big Dreams",
-    formTitle: "DONATE TO SUPPORT FUTURE",
+    title: "Together for Education",
+    formTitle: "DONATE TO SUPPORT EDUCATION",
     paragraphs: [
-      "Every young mind carries the potential to shape tomorrow. But for thousands of underprivileged youth in India, dreams are cut short due to lack of proper guidance, resources, and opportunities. Without the right support, many talented students are unable to compete in today's world, leaving their future uncertain.",
+      "Education is the most powerful tool to break the cycle of poverty. Yet, millions of children in India are forced to drop out of school because of financial hardships, lack of resources, or family struggles. For them, a missed year of education often means a lifetime of lost opportunities.",
       <>
         Through Evolve Sangh Foundation&apos;s{" "}
-        <strong>&apos;Small Kits, Big Dreams&apos;</strong> campaign, we are
-        preparing these young dreamers for a brighter tomorrow. By providing
-        career counseling, mentorship, skill development training, and academic
-        support, we ensure that no talent goes unnoticed and no dream remains
-        unfulfilled.
+        <strong>&apos;Together for Education&apos;</strong> campaign is committed
+        to ensuring that every child continues their learning journey, no matter
+        their circumstances. From distributing school kits, books, and uniforms
+        to supporting school fees and remedial classes, we are keeping the flame
+        of education alive for children in need.
       </>,
+      "But the challenge is immense. Your support can ensure that a child does not have to give up their classroom for child labor, or their books for survival. By contributing to Together for Education, you are giving the gift of knowledge, confidence, and a brighter tomorrow.",
       <>
-        <strong>But we cannot do this alone.</strong> Your support can help a
-        student take their first confident step towards a successful future. By
-        contributing to Small Kits, Big Dreams, you are not just empowering an
-        individual, you are uplifting an entire family and shaping India&apos;s
-        future leaders.
-      </>,
-      <>
-        <span className="text-[#005089] font-semibold">
-           <strong>Donate today</strong> and be the reason a student dares to
-          dream bigger. Together, we can prepare them for tomorrow.
-        </span>
+        <strong>Donate now.</strong> Because when education continues, hope never
+        stops.
       </>,
     ],
   },
