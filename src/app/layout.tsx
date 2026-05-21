@@ -30,6 +30,11 @@ const leagueGothic = League_Gothic({
 export const metadata: Metadata = {
   title: "Evolve Sangh Foundation",
   description: "Living, Loving, Learning - Evolve Sangh Foundation",
+  icons: {
+    icon: "/nav/EVOLVE_final_LOGO%201.png",
+    shortcut: "/nav/EVOLVE_final_LOGO%201.png",
+    apple: "/nav/EVOLVE_final_LOGO%201.png",
+  },
 };
 
 export default function RootLayout({

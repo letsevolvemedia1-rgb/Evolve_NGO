@@ -72,10 +72,10 @@ export function Header() {
         <div className="container mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center group">
             <Image
-              src="/nav/EVOLVE_final_LOGO 1.svg"
+              src="/nav/EVOLVE_final_LOGO%201.png"
               alt="Evolve Sangh Foundation"
-              width={180}
-              height={60}
+              width={138}
+              height={136}
               className="h-12 md:h-14 w-auto object-contain"
               priority
             />

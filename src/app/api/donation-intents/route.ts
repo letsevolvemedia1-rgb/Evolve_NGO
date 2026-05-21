@@ -98,6 +98,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: errorMessage }, { status: 502 });
     }
 
+    let donationIntentId: string | null = null;
+
     if (isDatabaseConfigured()) {
       try {
         const campaign =
@@ -120,7 +122,7 @@ export async function POST(request: Request) {
             : null;
         persistedCampaignTitle = campaign?.title ?? null;
 
-        await prisma.donationIntent.create({
+        const createdIntent = await prisma.donationIntent.create({
           data: {
             donorName: validation.data.donorName,
             email: validation.data.email,
@@ -136,8 +138,12 @@ export async function POST(request: Request) {
             consentToContact: validation.data.consentToContact,
             campaignId: campaign?.id ?? null,
             campaignLabel: campaign?.title ?? campaignConfig?.title ?? null,
+            notes: `razorpay_order_id:${orderPayload.id}`,
           },
+          select: { id: true },
         });
+
+        donationIntentId = createdIntent.id;
       } catch (dbError) {
         console.error(
           "donation-intents DB write failed (non-blocking)",
@@ -154,6 +160,7 @@ export async function POST(request: Request) {
       currency: orderPayload.currency,
       campaignTitle:
         persistedCampaignTitle ?? campaignConfig?.title ?? "Support a Cause",
+      donationIntentId,
     });
   } catch (error) {
     console.error("donation-intents POST failed", error);

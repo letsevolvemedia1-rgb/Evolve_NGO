@@ -3,9 +3,49 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
+type RazorpayPaymentResponse = {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+};
+
+type PaymentSlip = {
+  status: string;
+  paymentId: string;
+  orderId: string;
+  amountInr: number | null;
+  donorName: string | null;
+  email: string | null;
+  panNumber: string | null;
+  campaignTitle: string;
+  paidAt: string;
+};
+
 declare global {
   interface Window {
-    Razorpay?: new (options: Record<string, unknown>) => {
+    Razorpay?: new (options: {
+      key: string;
+      amount: number;
+      currency: string;
+      name: string;
+      description: string;
+      order_id: string;
+      prefill: {
+        name: string;
+        email: string;
+        contact: string;
+      };
+      notes: {
+        causeCode: string;
+      };
+      theme: {
+        color: string;
+      };
+      handler: (response: RazorpayPaymentResponse) => void | Promise<void>;
+      modal: {
+        ondismiss: () => void;
+      };
+    }) => {
       open: () => void;
     };
   }
@@ -73,7 +113,7 @@ const campaigns = [
         communities.
       </>,
       <>
-         <strong>Donate now.</strong> Be the reason someone sleeps peacefully
+        <strong>Donate now.</strong> Be the reason someone sleeps peacefully
         tonight. Together, we can build a hunger-free India, one meal at a time.
       </>,
     ],
@@ -89,16 +129,16 @@ const campaigns = [
       "Education is the most powerful tool to break the cycle of poverty. Yet, millions of children in India are forced to drop out of school because of financial hardships, lack of resources, or family struggles. For them, a missed year of education often means a lifetime of lost opportunities.",
       <>
         Through Evolve Sangh Foundation&apos;s{" "}
-        <strong>&apos;Together for Education&apos;</strong> campaign is committed
-        to ensuring that every child continues their learning journey, no matter
-        their circumstances. From distributing school kits, books, and uniforms
-        to supporting school fees and remedial classes, we are keeping the flame
-        of education alive for children in need.
+        <strong>&apos;Together for Education&apos;</strong> campaign is
+        committed to ensuring that every child continues their learning journey,
+        no matter their circumstances. From distributing school kits, books, and
+        uniforms to supporting school fees and remedial classes, we are keeping
+        the flame of education alive for children in need.
       </>,
       "But the challenge is immense. Your support can ensure that a child does not have to give up their classroom for child labor, or their books for survival. By contributing to Together for Education, you are giving the gift of knowledge, confidence, and a brighter tomorrow.",
       <>
-        <strong>Donate now.</strong> Because when education continues, hope never
-        stops.
+        <strong>Donate now.</strong> Because when education continues, hope
+        never stops.
       </>,
     ],
   },
@@ -135,7 +175,10 @@ function SupportACauseContent() {
     type: "idle",
     message: "",
   });
+  const [paymentSlip, setPaymentSlip] = useState<PaymentSlip | null>(null);
+  const [isSlipModalOpen, setIsSlipModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [dateInputType, setDateInputType] = useState<"text" | "date">("text");
   const amountInr = formData.otherAmount.trim() || selectedAmount;
   const parsedAmount = Number(amountInr.toString().replace(/,/g, ""));
   const formattedAmount =
@@ -176,6 +219,90 @@ function SupportACauseContent() {
       document.body.appendChild(script);
     });
 
+  const formatSlipDate = (value: string) =>
+    new Date(value).toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+  const escapeHtml = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const handleDownloadSlipPdf = () => {
+    if (!paymentSlip || typeof window === "undefined") {
+      return;
+    }
+
+    const html = `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Donation Receipt</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 24px; color: #1f2937; }
+      .receipt { max-width: 680px; margin: 0 auto; border: 1px solid #c8e8ff; border-radius: 12px; padding: 20px; }
+      .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #c8e8ff; padding-bottom: 10px; margin-bottom: 16px; }
+      .title { margin: 0; color: #005089; font-size: 24px; font-weight: 700; }
+      .status { color: #15803d; background: #dcfce7; padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; }
+      .row { display: flex; justify-content: space-between; gap: 20px; padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
+      .label { color: #6b7280; font-weight: 600; }
+      .value { color: #111827; font-weight: 700; text-align: right; word-break: break-all; }
+      .footer { margin-top: 12px; font-size: 12px; color: #6b7280; }
+    </style>
+  </head>
+  <body>
+    <div class="receipt">
+      <div class="header">
+        <h1 class="title">Payment Slip</h1>
+        <span class="status">${escapeHtml(paymentSlip.status)}</span>
+      </div>
+      <div class="row"><span class="label">Donor</span><span class="value">${escapeHtml(paymentSlip.donorName ?? "-")}</span></div>
+      <div class="row"><span class="label">Amount</span><span class="value">Rs ${escapeHtml(paymentSlip.amountInr?.toLocaleString() ?? "-")}</span></div>
+      <div class="row"><span class="label">Campaign</span><span class="value">${escapeHtml(paymentSlip.campaignTitle)}</span></div>
+      <div class="row"><span class="label">Payment ID</span><span class="value">${escapeHtml(paymentSlip.paymentId)}</span></div>
+      <div class="row"><span class="label">Order ID</span><span class="value">${escapeHtml(paymentSlip.orderId)}</span></div>
+      <div class="row"><span class="label">PAN</span><span class="value">${escapeHtml(paymentSlip.panNumber ?? "-")}</span></div>
+      <div class="row"><span class="label">Paid At</span><span class="value">${escapeHtml(formatSlipDate(paymentSlip.paidAt))}</span></div>
+      <p class="footer">Evolve Sangh Foundation - Donation payment confirmation</p>
+    </div>
+    <script>
+      window.onload = function () {
+        window.print();
+        window.setTimeout(function () { window.close(); }, 300);
+      };
+    </script>
+  </body>
+</html>`;
+
+    const printWindow = window.open(
+      "",
+      "_blank",
+      "noopener,noreferrer,width=900,height=700",
+    );
+    if (!printWindow) {
+      setStatus({
+        type: "error",
+        message:
+          "Unable to open print window. Please allow popups and try again.",
+      });
+      return;
+    }
+
+    printWindow.document.open();
+    printWindow.document.write(html);
+    printWindow.document.close();
+  };
+
   // Auto-advance campaign every 10 seconds unless paused
   useEffect(() => {
     if (isPaused) return;
@@ -203,6 +330,8 @@ function SupportACauseContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setPaymentSlip(null);
+    setIsSlipModalOpen(false);
     setStatus({ type: "idle", message: "" });
 
     try {
@@ -235,6 +364,7 @@ function SupportACauseContent() {
         amount?: number;
         currency?: string;
         campaignTitle?: string;
+        donationIntentId?: string | null;
       };
       if (!response.ok) {
         throw new Error(
@@ -276,11 +406,68 @@ function SupportACauseContent() {
         theme: {
           color: "#005089",
         },
-        handler: () => {
-          setStatus({
-            type: "success",
-            message: "Payment successful. Thank you for your donation.",
-          });
+        handler: async (paymentResponse) => {
+          try {
+            const verifyResponse = await fetch("/api/donation-intents/verify", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                donationIntentId: result.donationIntentId ?? null,
+                razorpay_order_id: paymentResponse.razorpay_order_id,
+                razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                razorpay_signature: paymentResponse.razorpay_signature,
+                donorName: formData.donorName,
+                email: formData.email,
+                panNumber: formData.panNumber,
+                campaignTitle: result.campaignTitle ?? currentCampaign.title,
+                amountInr: Math.round(result.amount / 100),
+              }),
+            });
+
+            const verifyResult = (await verifyResponse.json()) as {
+              error?: string;
+              slip?: PaymentSlip;
+            };
+
+            if (!verifyResponse.ok || !verifyResult.slip) {
+              throw new Error(
+                verifyResult.error ||
+                  "Payment succeeded but receipt verification failed. Please contact support.",
+              );
+            }
+
+            setPaymentSlip(verifyResult.slip);
+            setIsSlipModalOpen(true);
+            setStatus({
+              type: "success",
+              message: "Payment successful. Your donation receipt is ready.",
+            });
+
+            setFormData({
+              otherAmount: "",
+              donorName: "",
+              email: "",
+              phone: "",
+              dateOfBirth: "",
+              panNumber: "",
+              country: "India",
+              state: "",
+              city: "",
+              address: "",
+              pincode: "",
+              consentToContact: false,
+            });
+            setSelectedAmount("5000");
+            setDateInputType("text");
+          } catch (verificationError) {
+            const message =
+              verificationError instanceof Error
+                ? verificationError.message
+                : "Payment verification failed. Please contact support.";
+            setStatus({ type: "error", message });
+          }
         },
         modal: {
           ondismiss: () => {
@@ -293,25 +480,7 @@ function SupportACauseContent() {
       });
 
       razorpay.open();
-
-      setFormData({
-        otherAmount: "",
-        donorName: "",
-        email: "",
-        phone: "",
-        dateOfBirth: "",
-        panNumber: "",
-        country: "India",
-        state: "",
-        city: "",
-        address: "",
-        pincode: "",
-        consentToContact: false,
-      });
-      setSelectedAmount("5000");
-      if (status.type === "idle") {
-        setStatus({ type: "success", message: "Redirecting to payment..." });
-      }
+      setStatus({ type: "success", message: "Redirecting to payment..." });
     } catch (error) {
       const message =
         error instanceof Error
@@ -501,9 +670,16 @@ function SupportACauseContent() {
                       className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
                     />
                     <input
-                      type="date"
+                      type={dateInputType}
                       name="dateOfBirth"
+                      placeholder="Date of Birth"
                       value={formData.dateOfBirth}
+                      onFocus={() => setDateInputType("date")}
+                      onBlur={() => {
+                        if (!formData.dateOfBirth) {
+                          setDateInputType("text");
+                        }
+                      }}
                       onChange={handleInputChange}
                       className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
                     />
@@ -513,7 +689,7 @@ function SupportACauseContent() {
                     <input
                       type="text"
                       name="panNumber"
-                      placeholder="Pan No"
+                      placeholder="ABCDE1234F"
                       value={formData.panNumber}
                       onChange={handleInputChange}
                       className="border border-gray-300 rounded-sm px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-[#005089] text-slate-700"
@@ -665,6 +841,76 @@ function SupportACauseContent() {
           </a>
         </div>
       </section>
+
+      {paymentSlip && isSlipModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4 py-8">
+          <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-[#C8E8FF] overflow-hidden">
+            <div className="flex items-center justify-between border-b border-[#C8E8FF] px-5 py-4 bg-[#F8FCFF]">
+              <h3 className="text-lg md:text-xl font-extrabold text-[#005089] uppercase">
+                Payment Slip
+              </h3>
+              <span className="text-xs font-bold px-2 py-1 rounded bg-green-100 text-green-700">
+                {paymentSlip.status}
+              </span>
+            </div>
+
+            <div className="px-5 py-5 space-y-3 text-sm text-slate-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <p>
+                  <span className="font-semibold text-slate-500">Donor:</span>{" "}
+                  {paymentSlip.donorName ?? "-"}
+                </p>
+                <p>
+                  <span className="font-semibold text-slate-500">Amount:</span>{" "}
+                  Rs {paymentSlip.amountInr?.toLocaleString() ?? "-"}
+                </p>
+              </div>
+
+              <p>
+                <span className="font-semibold text-slate-500">Campaign:</span>{" "}
+                {paymentSlip.campaignTitle}
+              </p>
+              <p className="break-all">
+                <span className="font-semibold text-slate-500">
+                  Payment ID:
+                </span>{" "}
+                {paymentSlip.paymentId}
+              </p>
+              <p className="break-all">
+                <span className="font-semibold text-slate-500">Order ID:</span>{" "}
+                {paymentSlip.orderId}
+              </p>
+              {paymentSlip.panNumber && (
+                <p>
+                  <span className="font-semibold text-slate-500">PAN:</span>{" "}
+                  {paymentSlip.panNumber}
+                </p>
+              )}
+              <p>
+                <span className="font-semibold text-slate-500">Paid At:</span>{" "}
+                {formatSlipDate(paymentSlip.paidAt)}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-end border-t border-[#C8E8FF] px-5 py-4 bg-[#F8FCFF]">
+              <button
+                type="button"
+                onClick={handleDownloadSlipPdf}
+                className="bg-[#005089] hover:bg-[#003d6b] text-white font-semibold text-sm px-5 py-2.5 rounded-sm transition-colors"
+              >
+                Download PDF
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsSlipModalOpen(false)}
+                className="bg-white border border-[#005089] text-[#005089] hover:bg-[#EAF6FF] font-semibold text-sm px-5 py-2.5 rounded-sm transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
