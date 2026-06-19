@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Oswald, Open_Sans, League_Gothic } from "next/font/google";
 import { Chrome } from "@/components/layout/Chrome";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { Analytics } from "@vercel/analytics/next";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
         <LenisProvider>
           <Chrome>{children}</Chrome>
         </LenisProvider>
+        <Analytics />
       </body>
     </html>
   );
