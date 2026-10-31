@@ -185,6 +185,16 @@ export function Header() {
             </div>
 
             <Link
+              href="/heritage-walk"
+              className="text-sm font-bold text-[#0067A5] hover:text-[#FFA500] uppercase tracking-wide transition-colors flex items-center gap-1.5"
+            >
+              Heritage Walk
+              <span className="bg-[#FFA500] text-slate-900 text-[10px] px-1.5 py-0.5 rounded font-black tracking-normal">
+                NEW
+              </span>
+            </Link>
+
+            <Link
               href="/contact-us"
               className="text-sm font-bold text-slate-600 hover:text-[#0067A5] uppercase tracking-wide transition-colors"
             >
@@ -298,6 +308,17 @@ export function Header() {
                 ))}
               </div>
             </div>
+
+            <Link
+              href="/heritage-walk"
+              className="text-base font-bold text-[#0067A5] flex items-center justify-between"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span>THE HERITAGE WALK</span>
+              <span className="bg-[#FFA500] text-slate-900 text-[10px] px-2 py-0.5 rounded font-black">
+                NEW
+              </span>
+            </Link>
 
             <Link
               href="/contact-us"

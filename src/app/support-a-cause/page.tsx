@@ -422,7 +422,7 @@ function SupportACauseContent() {
                 email: formData.email,
                 panNumber: formData.panNumber,
                 campaignTitle: result.campaignTitle ?? currentCampaign.title,
-                amountInr: Math.round(result.amount / 100),
+                amountInr: Math.round((result.amount ?? 0) / 100),
               }),
             });
 
