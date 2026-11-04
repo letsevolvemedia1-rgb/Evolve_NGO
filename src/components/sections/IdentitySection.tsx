@@ -16,7 +16,7 @@ export function IdentitySection() {
                 <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 items-center">
                     <div className="relative w-full h-[300px] md:h-[380px]">
                         <Image
-                            src="/About/OurIdentity.svg"
+                            src="/About/OurIdentity.webp"
                             alt="Our Identity"
                             fill
                             className="object-contain"

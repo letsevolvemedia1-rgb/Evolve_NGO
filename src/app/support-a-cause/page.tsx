@@ -503,7 +503,7 @@ function SupportACauseContent() {
           alt="spacer"
           className="w-full h-auto invisible"
           aria-hidden="true"
-        />
+         loading="eager"/>
 
         {/* Crossfading Hero Images */}
         {campaigns.map((camp, idx) => (
@@ -517,7 +517,7 @@ function SupportACauseContent() {
               src={camp.heroImage}
               alt={camp.title}
               className="w-full h-full object-contain sm:object-cover"
-            />
+             loading="lazy"/>
           </div>
         ))}
 

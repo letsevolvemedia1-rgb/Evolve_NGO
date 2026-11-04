@@ -25,7 +25,7 @@ export function HeroSlider() {
     return (
         <section className="relative w-full bg-[#003056] overflow-hidden group">
             {/* Structural invisible image to define height responsively based on the slide's intrinsic aspect ratio */}
-            <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true" />
+            <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true"  loading="eager"/>
             
             {/* Slider Images */}
             {heroSlides.map((slide, index) => (
@@ -35,7 +35,7 @@ export function HeroSlider() {
                         index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
                     }`}
                 >
-                    <img src={slide} alt={`Youth Welfare Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover" />
+                    <img src={slide} alt={`Youth Welfare Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover"  loading="lazy"/>
                 </div>
             ))}
 

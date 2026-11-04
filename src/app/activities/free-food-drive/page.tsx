@@ -80,7 +80,7 @@ export default function FreeFoodDrivePage() {
             {/* ── Hero Slider ─── */}
             <section className="relative w-full bg-slate-100 overflow-hidden group">
                 {/* Structural invisible image to define height responsively based on the slide's intrinsic aspect ratio */}
-                <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true" />
+                <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true"  loading="eager"/>
                 
                 {heroSlides.map((slide, index) => (
                     <div
@@ -89,7 +89,7 @@ export default function FreeFoodDrivePage() {
                             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
                     >
-                        <img src={slide} alt={`Free Food Drive Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover" />
+                        <img src={slide} alt={`Free Food Drive Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover"  loading="lazy"/>
                     </div>
                 ))}
 
@@ -121,17 +121,17 @@ export default function FreeFoodDrivePage() {
                         <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] border-[6px] md:border-8 border-[#00AEFF] bg-white flex items-center justify-center">
                             {/* Circle 1: Top Left */}
                             <div className="absolute top-[-25px] md:top-[-30px] left-[-20px] md:left-[-30px] w-40 h-40 md:w-48 md:h-48 rounded-full border-[6px] border-white overflow-hidden bg-gray-100 z-30 shadow-sm">
-                                <img src="/new/Freefood/Slider.png" alt="Food Drive 1" className="w-full h-full object-cover" />
+                                <img src="/new/Freefood/Slider.png" alt="Food Drive 1" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                             
                             {/* Circle 2: Mid-right */}
                             <div className="absolute top-1/2 -translate-y-1/2 right-[-25px] md:right-[-35px] w-36 h-36 md:w-44 md:h-44 rounded-full border-[6px] border-white overflow-hidden bg-gray-200 z-20 shadow-sm">
-                                <img src="/new/Freefood/Slider2.png" alt="Food Drive 2" className="w-full h-full object-cover" />
+                                <img src="/new/Freefood/Slider2.png" alt="Food Drive 2" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                             
                             {/* Circle 3: Bottom Left */}
                             <div className="absolute bottom-[-20px] md:bottom-[-25px] left-2 md:left-6 w-36 h-36 md:w-44 md:h-44 rounded-full border-[6px] border-white overflow-hidden bg-gray-300 z-10 shadow-sm">
-                                <img src="/new/Freefood/Slider3.png" alt="Food Drive 3" className="w-full h-full object-cover" />
+                                <img src="/new/Freefood/Slider3.png" alt="Food Drive 3" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@ export default function FreeFoodDrivePage() {
                         </div>
                         <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2">
                             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-sm">
-                                <img src="/new/Freefood/WhatWeDo.png" alt="What We Do" className="w-full h-full object-cover" />
+                                <img src="/new/Freefood/WhatWeDo.png" alt="What We Do" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@ export default function FreeFoodDrivePage() {
                     <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 max-w-6xl mx-auto">
                         <div className="w-full md:w-5/12 flex justify-center shrink-0">
                             <div className="relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-sm">
-                                <img src="/new/Freefood/Ourfocus.png" alt="Our Focus" className="w-full h-full object-cover" />
+                                <img src="/new/Freefood/Ourfocus.png" alt="Our Focus" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
 
@@ -245,7 +245,7 @@ export default function FreeFoodDrivePage() {
                         ].map((src, i) => (
                             <div key={i} className="aspect-square bg-[#fdefd1] rounded-sm overflow-hidden flex items-center justify-center shadow-sm">
                                 {src ? (
-                                    <img src={src} alt={`Free Food Drive Glimpse ${i + 1}`} className="w-full h-full object-cover" />
+                                    <img src={src} alt={`Free Food Drive Glimpse ${i + 1}`} className="w-full h-full object-cover"  loading="lazy"/>
                                 ) : null}
                             </div>
                         ))}

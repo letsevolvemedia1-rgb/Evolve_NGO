@@ -158,7 +158,7 @@ export default function SkillDevelopmentProgramPage() {
           alt="spacer"
           className="w-full h-auto invisible"
           aria-hidden="true"
-        />
+         loading="eager"/>
 
         {heroSlides.map((slide, index) => (
           <div
@@ -171,7 +171,7 @@ export default function SkillDevelopmentProgramPage() {
               src={slide}
               alt={`Skill Development Slide ${index + 1}`}
               className="w-full h-full object-contain sm:object-cover"
-            />
+             loading="lazy"/>
           </div>
         ))}
 
@@ -207,7 +207,7 @@ export default function SkillDevelopmentProgramPage() {
                 src="/SkillDev/Why.png"
                 alt="Why Skill Development"
                 className="w-full h-full object-contain"
-              />
+               loading="lazy"/>
             </div>
           </div>
 
@@ -264,7 +264,7 @@ export default function SkillDevelopmentProgramPage() {
                   src="/SkillDev/WHATWeDo.png"
                   alt="What We Do"
                   className="w-full h-full object-cover"
-                />
+                 loading="lazy"/>
               </div>
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function SkillDevelopmentProgramPage() {
                   src="/SkillDev/OurFocus.png"
                   alt="Our Focus"
                   className="w-full h-full object-cover"
-                />
+                 loading="lazy"/>
               </div>
             </div>
 
@@ -333,7 +333,7 @@ export default function SkillDevelopmentProgramPage() {
                   src={src}
                   alt={`Skill Development Glimpse ${i + 1}`}
                   className="w-full h-full object-cover"
-                />
+                 loading="lazy"/>
               </div>
             ))}
           </div>
