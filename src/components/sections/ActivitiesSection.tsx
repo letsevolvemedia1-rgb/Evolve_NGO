@@ -9,16 +9,16 @@ const SLIDES = [
         category: "LIVING",
         activities: [
             { title: "FREE FOOD DISTRIBUTION", image: "/new/Homepage/freefood.webp" },
-            { title: "YOUTH WELFARE CENTERS", image: "/new/Homepage/YouthWelfarecenters.webp" },
-            { title: "FREE CLOTH DISTRIBUTION", image: "/new/Homepage/FreeCloth.webp" },
+            { title: "YOUTH WELFARE CENTERS", image: "/new/Homepage/YouthWelfarecenters.svg" },
+            { title: "FREE CLOTH DISTRIBUTION", image: "/new/Homepage/FreeCloth.svg" },
         ],
     },
     {
         category: "LOVING",
         activities: [
             { title: "ENVIRONMENT CARE", image: "/new/Homepage/Environmentcare.webp" },
-            { title: "MENTAL WELLNESS PROGRAM", image: "/new/Homepage/MentalWellnessProgram.webp" },
-            { title: "WOMEN EMPOWERMENT", image: "/new/Homepage/womenEmpowerment.webp" },
+            { title: "MENTAL WELLNESS PROGRAM", image: "/new/Homepage/MentalWellnessProgram.svg" },
+            { title: "WOMEN EMPOWERMENT", image: "/new/Homepage/womenEmpowerment.svg" },
         ],
     },
     {
@@ -26,7 +26,7 @@ const SLIDES = [
         activities: [
             { title: "SKILLS FOR BETTER TOMORROW", image: "/new/Homepage/SkillForBetterTommoro.webp" },
             { title: "ACCESS TO EDUCATION INITIATIVE", image: "/new/Homepage/AccesstoEducationinitiative.webp" },
-            { title: "MENTAL WELLNESS PROGRAMS", image: "/new/Homepage/mentalWellnessClass.webp" },
+            { title: "MENTAL WELLNESS PROGRAMS", image: "/new/Homepage/mentalWellnessClass.svg" },
         ],
     },
 ];
