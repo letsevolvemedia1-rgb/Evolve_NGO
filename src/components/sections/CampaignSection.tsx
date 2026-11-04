@@ -11,7 +11,7 @@ const campaigns = [
   {
     title: "HUNGER\nFREE NIGHT",
     desc: "Every night, millions of Indians go to bed hungry. In a country that is moving forward rapidly, it is heartbreaking that so many children, women, and daily wage earners still sleep without a proper meal.",
-    image: "/Homepage/image.svg",
+    image: "/Homepage/image.webp",
     url: "/support-a-cause?cause=food",
   },
   {

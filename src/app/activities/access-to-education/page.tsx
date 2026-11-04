@@ -82,9 +82,9 @@ const educationFocus = [
 ];
 
 const HERO_IMAGES = [
-    "/AccessToEducation/Slider.svg",
-    "/AccessToEducation/Slider2.svg",
-    "/AccessToEducation/Slider3.svg"
+    "/AccessToEducation/Slider.webp",
+    "/AccessToEducation/Slider2.webp",
+    "/AccessToEducation/Slider3.webp"
 ];
 
 export default function AccessToEducationPage() {
@@ -122,8 +122,8 @@ export default function AccessToEducationPage() {
                 <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
                     <div className="w-full md:w-2/5 flex justify-center">
                         <div className="relative w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
-                            <div className="absolute top-0 left-0 w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-[#87CEEB] overflow-hidden bg-gray-100 z-10"><img src="/new/Education/Slider2.svg" alt="Education" className="w-full h-full object-cover" /></div>
-                            <div className="absolute bottom-0 left-6 w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-[#00AEFF] overflow-hidden bg-gray-200 z-20"><img src="/new/Education/Slider3.svg" alt="Education" className="w-full h-full object-cover" /></div>
+                            <div className="absolute top-0 left-0 w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-[#87CEEB] overflow-hidden bg-gray-100 z-10"><img src="/new/Education/Slider2.webp" alt="Education" className="w-full h-full object-cover" /></div>
+                            <div className="absolute bottom-0 left-6 w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-[#00AEFF] overflow-hidden bg-gray-200 z-20"><img src="/new/Education/Slider3.webp" alt="Education" className="w-full h-full object-cover" /></div>
                             <div className="absolute top-1/4 right-0 w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-300 z-30"><img src="/new/Education/glimse.png" alt="Education" className="w-full h-full object-cover" /></div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ export default function AccessToEducationPage() {
                     <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
                         <div className="w-full md:w-5/12 flex justify-center md:justify-start">
                             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border-2 border-slate-100">
-                                <img src="/new/Education/OurFocus.svg" alt="Our Focus" className="w-full h-full object-cover object-center" />
+                                <img src="/new/Education/OurFocus.webp" alt="Our Focus" className="w-full h-full object-cover object-center" />
                             </div>
                         </div>
                         <div className="w-full md:w-7/12">

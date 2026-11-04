@@ -40,7 +40,7 @@ export function WhatWeDo({
                     <div className="w-full md:w-1/4 flex justify-center order-1 md:order-2">
                         <div className="relative w-40 h-40 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden border-4 border-[#005089] bg-gray-200 shrink-0 shadow-sm">
                             <Image
-                                src="/new/Youth/logo2.svg"
+                                src="/new/Youth/logo2.webp"
                                 alt={imageAlt}
                                 fill
                                 className="object-cover"
