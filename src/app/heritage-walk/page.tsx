@@ -28,50 +28,50 @@ const collegeCoordinators = [
   {
     college: "IIT BHU (Indian Institute of Technology, Varanasi)",
     code: "IIT-BHU",
-    coordinator: "Campus Coordinator",
+    coordinator: "Hariom Yadav",
     role: "Campus Coordinator",
-    phone: "+91 91510 50780",
-    email: "iitbhu.coordinator@evolvesangh.org",
+    phone: "+91 9301787374",
+    email: "hariomsingh.yadav.mec24@itbhu.ac.in",
   },
   {
     college: "IIIT Lucknow (Indian Institute of Information Technology)",
     code: "IIIT-L",
-    coordinator: "Campus Coordinator",
+    coordinator: "Jagdish Shanamwad",
     role: "Campus Coordinator",
-    phone: "+91 91510 50781",
-    email: "iiitl.coordinator@evolvesangh.org",
+    phone: "+91 8688779702",
+    email: "lcs2023053@iiitl.ac.in",
   },
   {
     college: "HBTU Kanpur (Harcourt Butler Technical University)",
     code: "HBTU",
-    coordinator: "Aditya Sharma",
-    role: "Student Coordinator",
-    phone: "+91 91510 50782",
-    email: "aditya.hbtu@evolvesangh.org",
+    coordinator: "Parth Anil Verma",
+    role: "Campus Coordinator",
+    phone: "+91 8299376368",
+    email: "230112041@hbtu.ac.in",
   },
   {
     college: "KNIT Sultanpur (Kamla Nehru Institute of Technology)",
     code: "KNIT",
-    coordinator: "Campus Coordinator",
+    coordinator: "Prakarsh Chandra",
     role: "Campus Coordinator",
-    phone: "+91 91510 50783",
-    email: "knit.coordinator@evolvesangh.org",
+    phone: "+91 8840105805",
+    email: "ys.prakarsh@gmail.com",
   },
   {
     college: "IIT Guwahati (Indian Institute of Technology Guwahati)",
     code: "IITG",
-    coordinator: "Campus Coordinator",
+    coordinator: "Shantanu Tiwari",
     role: "Campus Coordinator",
-    phone: "+91 91510 50784",
-    email: "iitg.coordinator@evolvesangh.org",
+    phone: "+91 9389172531",
+    email: "shantanu.tiwari@iitg.ac.in",
   },
   {
     college: "Other Colleges / Universities",
     code: "OTHER",
-    coordinator: "Vishant & Prakarsh",
-    role: "Central Tour Coordinators",
-    phone: "+91 91510 50780",
-    email: "letsevolve.official@gmail.com",
+    coordinator: "Vishant Agrawal",
+    role: "Central Tour Coordinator",
+    phone: "+91 9151050780",
+    email: "vishant.agrawal.eee20@itbhu.ac.in",
   },
 ];
 
@@ -152,24 +152,22 @@ const destinations = [
 // Past Tour Memories
 const glimpses = [
   {
-    image: "/HeritageWalk/hero-tour.jpg",
-    title: "The Majestic Gopuram of Madurai",
-    subtitle: "Students arriving at the historic Dravidian temple entrance during golden hour.",
+    image: "/HeritageWalk/puri-temple-hd.jpg",
+    title: "The Sacred Land of Puri",
+    subtitle:
+      "Exploring the timeless traditions and cultural significance of Shri Jagannath Temple, one of India's most revered pilgrimage destinations.",
   },
   {
-    image: "/HeritageWalk/glimpse-students.jpg",
-    title: "Joy of Shared Heritage",
-    subtitle: "College delegation bonding in the stone courtyard of ancient temple corridors.",
+    image: "/HeritageWalk/rameshwaram-end-hd.jpg",
+    title: "Where History Meets the Ocean",
+    subtitle:
+      "Students experience the coastal beauty and spiritual significance of Rameswaram, a destination deeply rooted in India's cultural heritage.",
   },
   {
-    image: "/HeritageWalk/glimpse-corridor.jpg",
-    title: "1,000 Pillars of Serenity",
-    subtitle: "A silent morning walk through sacred corridors where history meets devotion.",
-  },
-  {
-    image: "/HeritageWalk/glimpse-kanyakumari.jpg",
-    title: "Dawn at Vivekananda Rock",
-    subtitle: "Contemplating life, vision, and patriotism at India's southernmost ocean sanctuary.",
+    image: "/HeritageWalk/srirangam-gate-hd.jpg",
+    title: "The Architectural Marvel of Srirangam",
+    subtitle:
+      "Admiring the magnificent Rajagopuram of Srirangam, an extraordinary testament to South India's architectural brilliance and cultural legacy.",
   },
 ];
 
@@ -310,34 +308,31 @@ export default function HeritageWalkPage() {
             The Heritage Walk
           </h1>
           <p className="font-heading text-xl md:text-3xl uppercase tracking-widest text-[#FFA500] mt-3 mb-6 font-semibold">
-            South India Tour | Journey of Culture & Brotherhood
+            Heritage Tour | Journey of Culture & Brotherhood
           </p>
 
           <p
             className="text-slate-200 text-base md:text-xl max-w-3xl mx-auto leading-relaxed mb-10"
             style={{ fontFamily: "'Open Sans', sans-serif" }}
           >
-            An extraordinary travel tour for college students to explore the timeless spiritual,
-            architectural, and cultural wonders of South India. Travel together, bond with peers from
-            across universities, and awaken the wisdom of our ancient heritage.
+            An extraordinary travel tour for college students across ancient spiritual and cultural routes.
+            Travel together, bond with peers from across universities, and awaken the wisdom of our heritage.
           </p>
 
           {/* Quick Info Tags */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 w-full max-w-3xl mb-10">
-            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center">
-              <span className="block text-[#FFA500] text-xs uppercase tracking-wider font-bold">Destination</span>
-              <span className="text-sm md:text-base font-semibold text-white">Madurai & Rameshwaram</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl mb-10">
+            <div className="sm:col-span-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center flex flex-col justify-center">
+              <span className="block text-[#FFA500] text-xs uppercase tracking-wider font-bold">Route</span>
+              <span className="text-sm md:text-base font-semibold text-white">
+                Orissa &rarr; Tamil Nadu &rarr; Karnataka &rarr; Maharashtra
+              </span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center">
-              <span className="block text-[#00BCD4] text-xs uppercase tracking-wider font-bold">Highlight</span>
-              <span className="text-sm md:text-base font-semibold text-white">Kanyakumari Dawn</span>
+            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center flex flex-col justify-center">
+              <span className="block text-[#00BCD4] text-xs uppercase tracking-wider font-bold">Highlights</span>
+              <span className="text-sm md:text-base font-semibold text-white">Rameshwaram</span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center">
-              <span className="block text-green-400 text-xs uppercase tracking-wider font-bold">Eligibility</span>
-              <span className="text-sm md:text-base font-semibold text-white">Boys (College Students)</span>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center">
-              <span className="block text-[#C8E8FF] text-xs uppercase tracking-wider font-bold">Process</span>
+            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-lg p-3 text-center flex flex-col justify-center">
+              <span className="block text-green-400 text-xs uppercase tracking-wider font-bold">Process</span>
               <span className="text-sm md:text-base font-semibold text-white">Test & Selection</span>
             </div>
           </div>
@@ -513,25 +508,26 @@ export default function HeritageWalkPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {glimpses.map((item, idx) => (
               <div
                 key={idx}
-                className="group relative h-[340px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-100"
+                className="group relative h-[360px] md:h-[420px] rounded-2xl overflow-hidden shadow-lg border border-slate-100"
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                  <h3 className="font-heading text-xl md:text-2xl uppercase tracking-wide font-bold mb-1 text-[#FFA500]">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="font-heading text-lg md:text-xl uppercase tracking-wide font-bold mb-1 text-[#FFA500]">
                     {item.title}
                   </h3>
-                  <p className="text-sm md:text-base text-slate-200 leading-relaxed font-light">
+                  <p className="text-xs md:text-sm text-slate-200 leading-relaxed font-light">
                     {item.subtitle}
                   </p>
                 </div>
@@ -573,29 +569,33 @@ export default function HeritageWalkPage() {
           </div>
 
           {/* Desktop Table View */}
-          <div className="hidden md:block bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-            <table className="w-full text-left border-collapse">
+          <div className="hidden md:block bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto mb-8">
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr className="bg-[#0067A5] text-white text-xs uppercase font-heading tracking-wider">
-                  <th className="py-4 px-6">Participating College / University</th>
-                  <th className="py-4 px-6">Coordinator Name</th>
-                  <th className="py-4 px-6">Role</th>
-                  <th className="py-4 px-6">WhatsApp / Phone</th>
-                  <th className="py-4 px-6">Email Address</th>
+                  <th className="py-4 px-6 min-w-[240px]">Participating College / University</th>
+                  <th className="py-4 px-6 whitespace-nowrap">Coordinator Name</th>
+                  <th className="py-4 px-6 whitespace-nowrap">Role</th>
+                  <th className="py-4 px-6 whitespace-nowrap">WhatsApp / Phone</th>
+                  <th className="py-4 px-6 whitespace-nowrap">Email Address</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
                 {collegeCoordinators.map((c) => (
                   <tr key={c.code} className="hover:bg-slate-50 transition-colors">
                     <td className="py-4 px-6 font-semibold text-slate-900">{c.college}</td>
-                    <td className="py-4 px-6 font-medium">{c.coordinator}</td>
-                    <td className="py-4 px-6">
+                    <td className="py-4 px-6 font-medium whitespace-nowrap">{c.coordinator}</td>
+                    <td className="py-4 px-6 whitespace-nowrap">
                       <span className="text-xs px-2.5 py-1 rounded-full bg-[#C8E8FF]/40 text-[#0067A5] font-semibold">
                         {c.role}
                       </span>
                     </td>
-                    <td className="py-4 px-6 font-mono text-slate-800">{c.phone}</td>
-                    <td className="py-4 px-6 text-[#0067A5] hover:underline">
+                    <td className="py-4 px-6 font-mono text-slate-800 whitespace-nowrap">
+                      <a href={`tel:${c.phone.replace(/\s+/g, '')}`} className="hover:text-[#0067A5] hover:underline">
+                        {c.phone}
+                      </a>
+                    </td>
+                    <td className="py-4 px-6 text-[#0067A5] hover:underline whitespace-nowrap">
                       <a href={`mailto:${c.email}`}>{c.email}</a>
                     </td>
                   </tr>
@@ -618,8 +618,8 @@ export default function HeritageWalkPage() {
                   {c.coordinator} <span className="text-xs text-slate-400">({c.role})</span>
                 </p>
                 <div className="pt-2 border-t border-slate-100 flex flex-col gap-1 text-xs">
-                  <a href={`tel:${c.phone}`} className="flex items-center gap-1.5 text-slate-700">
-                    <Phone className="w-3.5 h-3.5 text-[#0067A5]" />
+                  <a href={`tel:${c.phone}`} className="flex items-center gap-1.5 text-slate-700 whitespace-nowrap">
+                    <Phone className="w-3.5 h-3.5 text-[#0067A5] flex-shrink-0" />
                     {c.phone}
                   </a>
                   <a href={`mailto:${c.email}`} className="flex items-center gap-1.5 text-[#0067A5]">
@@ -638,7 +638,7 @@ export default function HeritageWalkPage() {
                 Studying in another institution or want to nominate a campus coordinator?
               </h4>
               <p className="text-xs md:text-sm text-amber-800">
-                You can still register directly below! Select &ldquo;Other College&rdquo; or contact Central Coordinator Vishant at +91 9151050779.
+                You can still register directly below! Select &ldquo;Other College&rdquo; or contact Central Coordinator Vishant at +91 9151050780.
               </p>
             </div>
             <Button
@@ -1014,16 +1014,16 @@ export default function HeritageWalkPage() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-sm font-semibold">
               <a
+                href="tel:+918840105805"
+                className="flex items-center gap-2 text-[#0067A5] hover:underline"
+              >
+                <Phone className="w-4 h-4" /> +91 8840105805 (Prakarsh)
+              </a>
+              <a
                 href="tel:+919151050780"
                 className="flex items-center gap-2 text-[#0067A5] hover:underline"
               >
-                <Phone className="w-4 h-4" /> +91 91510 50780 (Prakarsh)
-              </a>
-              <a
-                href="tel:+919151050779"
-                className="flex items-center gap-2 text-[#0067A5] hover:underline"
-              >
-                <Phone className="w-4 h-4" /> +91 91510 50779 (Vishant)
+                <Phone className="w-4 h-4" /> +91 91510 50780 (Vishant)
               </a>
               <a
                 href="mailto:letsevolve.official@gmail.com"

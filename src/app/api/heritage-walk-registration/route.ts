@@ -15,7 +15,7 @@ export type HeritageWalkRegistrationPayload = {
 
 // User's deployed Google Apps Script Webhook
 const DEFAULT_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbzIQp0FDCxLm9SoKEsZ17Sd7PLtXxyScE1kKgMKzrSFgf1FFs3fz19mYUN7fR9rQX-u/exec";
+  "https://script.google.com/macros/s/AKfycbzYMKsf_TXjG8du_T45vPjqwzprnie07r90OFupRIDKCWJdEDFTdpgTrRF1605tljd5/exec";
 
 function generateRegistrationId(): string {
   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
