@@ -72,7 +72,7 @@ export default function EnvironmentCarePage() {
         <main className="w-full bg-white font-sans text-slate-800">
             <section className="relative w-full bg-slate-100 overflow-hidden group">
                 {/* Structural invisible image to define height responsively based on the slide's intrinsic aspect ratio */}
-                <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true" />
+                <img src={heroSlides[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true"  loading="eager"/>
                 
                 {heroSlides.map((slide, index) => (
                     <div
@@ -81,7 +81,7 @@ export default function EnvironmentCarePage() {
                             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
                     >
-                        <img src={slide} alt={`Environment Care Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover" />
+                        <img src={slide} alt={`Environment Care Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover"  loading="lazy"/>
                     </div>
                 ))}
 
@@ -111,13 +111,13 @@ export default function EnvironmentCarePage() {
                     <div className="w-full md:w-2/5 flex justify-center mt-4">
                         <div className="relative w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
                             <div className="absolute top-0 left-0 w-36 h-36 md:w-40 md:h-40 rounded-[2rem] border-4 border-[#87CEEB] overflow-hidden bg-gray-100 z-10">
-                                <img src="/new/Environment/glimse.png" alt="Environment Care" className="w-full h-full object-cover" />
+                                <img src="/new/Environment/glimse.png" alt="Environment Care" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                             <div className="absolute bottom-0 left-6 w-36 h-36 md:w-40 md:h-40 rounded-[2rem] border-4 border-[#00AEFF] overflow-hidden bg-gray-200 z-20">
-                                <img src="/new/Environment/glimse2.png" alt="Environment Care" className="w-full h-full object-cover" />
+                                <img src="/new/Environment/glimse2.png" alt="Environment Care" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                             <div className="absolute top-1/4 right-0 w-32 h-32 md:w-36 md:h-36 rounded-[2rem] border-4 border-white shadow-lg overflow-hidden bg-gray-300 z-30">
-                                <img src="/new/Environment/glimse3.png" alt="Environment Care" className="w-full h-full object-cover" />
+                                <img src="/new/Environment/glimse3.png" alt="Environment Care" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ export default function EnvironmentCarePage() {
                         </div>
                         <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2">
                             <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-sm border md:border-2 border-gray-100">
-                                <img src="/new/Environment/Slider.png" alt="What We Do" className="w-full h-full object-cover" />
+                                <img src="/new/Environment/Slider.png" alt="What We Do" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ export default function EnvironmentCarePage() {
                     <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
                         <div className="w-full md:w-5/12 flex justify-center">
                             <div className="relative w-full aspect-video md:aspect-[4/3] rounded-2xl overflow-hidden shadow-sm border md:border-2 border-gray-100">
-                                <img src="/new/Environment/Slider2.png" alt="Our Focus" className="w-full h-full object-cover" />
+                                <img src="/new/Environment/Slider2.png" alt="Our Focus" className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         </div>
 
@@ -223,7 +223,7 @@ export default function EnvironmentCarePage() {
                             "/new/Environment/glimse4.png",
                         ].map((src, i) => (
                             <div key={i} className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center shadow-sm">
-                                <img src={src} alt={`Environment Care Glimpse ${i + 1}`} className="w-full h-full object-cover" />
+                                <img src={src} alt={`Environment Care Glimpse ${i + 1}`} className="w-full h-full object-cover"  loading="lazy"/>
                             </div>
                         ))}
                     </div>

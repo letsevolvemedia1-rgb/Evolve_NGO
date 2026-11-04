@@ -44,7 +44,7 @@ export default function WomenEmpowermentPage() {
                     src="/new/Women/Slider.png"
                     alt="Women Economic & Social Development"
                     className="w-full h-auto block"
-                />
+                 loading="lazy"/>
             </section>
 
             {/* ── WOMEN EMPOWERMENT PROGRAM ─── */}

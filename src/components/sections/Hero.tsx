@@ -24,7 +24,7 @@ export function Hero() {
     return (
         <section className="relative w-full bg-[#003056] overflow-hidden group">
             {/* Structural invisible spacer to define height responsively based on the slider image's intrinsic aspect ratio */}
-            <img src={HERO_IMAGES[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true" />
+            <img src={HERO_IMAGES[0]} alt="spacer" className="w-full h-auto invisible" aria-hidden="true"  loading="eager"/>
 
             {HERO_IMAGES.map((src, index) => (
                 <div
@@ -34,7 +34,7 @@ export function Hero() {
                         index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                     )}
                 >
-                    <img src={src} alt={`Hero Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover" />
+                    <img src={src} alt={`Hero Slide ${index + 1}`} className="w-full h-full object-contain sm:object-cover"  loading="eager"/>
                 </div>
             ))}
 
