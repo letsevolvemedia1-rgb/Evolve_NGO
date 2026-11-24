@@ -143,7 +143,7 @@ export default function ContactUsPage() {
                   Regd. Office:
                 </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  233D- Lakhanpur Housing Society, Awadhpuri, Kanpur - 208024
+                  13 Avantipuram, Kalyanpur, Kanpur - 208024
                 </p>
               </div>
             </div>
