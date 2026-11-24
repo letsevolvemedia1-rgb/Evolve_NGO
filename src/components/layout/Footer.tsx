@@ -216,7 +216,7 @@ export function Footer() {
                   EVOLVE Sangh Foundation
                 </h4>
                 <p className="text-[12px] text-white/80 leading-[1.6]">
-                  233D- Lakhanpur Housing Society, Awadhpuri, Kanpur 208024
+                  13 Avantipuram, Kalyanpur, Kanpur - 208024
                 </p>
 
                 <p className="text-[12px] text-white/80 mt-4">
