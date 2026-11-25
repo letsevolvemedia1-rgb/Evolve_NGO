@@ -1,0 +1,426 @@
+[
+  {
+    "key": "home.hero.slide1",
+    "label": "Hero Slide 1 Image",
+    "type": "IMAGE",
+    "value": "/new/Homepage/Slider.png",
+    "page": "home",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "home.hero.slide2",
+    "label": "Hero Slide 2 Image",
+    "type": "IMAGE",
+    "value": "/new/Homepage/Slider2.png",
+    "page": "home",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "home.hero.slide3",
+    "label": "Hero Slide 3 Image",
+    "type": "IMAGE",
+    "value": "/new/Homepage/Slider3.png",
+    "page": "home",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "home.hero.slide4",
+    "label": "Hero Slide 4 Image",
+    "type": "IMAGE",
+    "value": "/new/Homepage/Slider4.png",
+    "page": "home",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "home.impact.stat1.value",
+    "label": "Impact Stat 1 — Number",
+    "type": "NUMBER",
+    "value": "90000",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat1.suffix",
+    "label": "Impact Stat 1 — Suffix",
+    "type": "TEXT",
+    "value": "+",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat1.label",
+    "label": "Impact Stat 1 — Label",
+    "type": "TEXT",
+    "value": "PLATES",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat1.sub",
+    "label": "Impact Stat 1 — Sub Label",
+    "type": "TEXT",
+    "value": "SERVED IN UNDERPRIVILEGED SCHOOLS",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat2.value",
+    "label": "Impact Stat 2 — Number",
+    "type": "NUMBER",
+    "value": "700",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat2.suffix",
+    "label": "Impact Stat 2 — Suffix",
+    "type": "TEXT",
+    "value": "+",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat2.label",
+    "label": "Impact Stat 2 — Label",
+    "type": "TEXT",
+    "value": "MEALS",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat2.sub",
+    "label": "Impact Stat 2 — Sub Label",
+    "type": "TEXT",
+    "value": "SERVED WEEKLY IN SLUMS",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat3.value",
+    "label": "Impact Stat 3 — Number",
+    "type": "NUMBER",
+    "value": "5000",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat3.suffix",
+    "label": "Impact Stat 3 — Suffix",
+    "type": "TEXT",
+    "value": "+",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat3.label",
+    "label": "Impact Stat 3 — Label",
+    "type": "TEXT",
+    "value": "CHILDREN",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat3.sub",
+    "label": "Impact Stat 3 — Sub Label",
+    "type": "TEXT",
+    "value": "RECEIVED QUALITY EDUCATION KIT",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat4.value",
+    "label": "Impact Stat 4 — Number",
+    "type": "NUMBER",
+    "value": "500",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat4.suffix",
+    "label": "Impact Stat 4 — Suffix",
+    "type": "TEXT",
+    "value": "+",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat4.label",
+    "label": "Impact Stat 4 — Label",
+    "type": "TEXT",
+    "value": "CHILDREN",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.impact.stat4.sub",
+    "label": "Impact Stat 4 — Sub Label",
+    "type": "TEXT",
+    "value": "BENEFITTED THROUGH FREE COACHING",
+    "page": "home",
+    "section": "Impact Stats"
+  },
+  {
+    "key": "home.mission.body",
+    "label": "Mission Paragraph",
+    "type": "TEXT",
+    "value": "Evolve Sangh Foundation is a Section 8 nonprofit dedicated to uplifting underprivileged youth in India. Our mission-driven programs cater to students who lack basic necessities, educational resources, or emotional support. Through grassroots initiatives like free food distribution in slums, midday meals in schools, stationery drives, and personalized career mentoring, we aim to break the cycle of poverty and despair. Our Youth Welfare Centers provide holistic care including hostel food, coaching, mental wellness, and value-based education. Anchored in compassion and guided by purpose, we believe every young mind deserves the tools, support, and environment to thrive.",
+    "page": "home",
+    "section": "Mission"
+  },
+  {
+    "key": "about.hero.image",
+    "label": "About Us — Hero Image",
+    "type": "IMAGE",
+    "value": "/About/Hero.jpeg",
+    "page": "about-us",
+    "section": "Hero"
+  },
+  {
+    "key": "about.identity.image",
+    "label": "About Us — Our Identity Image",
+    "type": "IMAGE",
+    "value": "/About/OurIdentity.webp",
+    "page": "about-us",
+    "section": "Our Identity"
+  },
+  {
+    "key": "activities.education.slider1",
+    "label": "Education — Slider Image 1",
+    "type": "IMAGE",
+    "value": "/new/Education/Slider.png",
+    "page": "activities/access-to-education",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.education.slider2",
+    "label": "Education — Slider Image 2",
+    "type": "IMAGE",
+    "value": "/new/Education/Slider2.png",
+    "page": "activities/access-to-education",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.education.slider3",
+    "label": "Education — Slider Image 3",
+    "type": "IMAGE",
+    "value": "/new/Education/Slider3.png",
+    "page": "activities/access-to-education",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.education.ourfocus",
+    "label": "Education — Our Focus Image",
+    "type": "IMAGE",
+    "value": "/new/Education/OurFocus.webp",
+    "page": "activities/access-to-education",
+    "section": "Our Focus"
+  },
+  {
+    "key": "activities.education.glimpse1",
+    "label": "Education — Glimpse 1",
+    "type": "IMAGE",
+    "value": "/new/Education/glimse.png",
+    "page": "activities/access-to-education",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.education.glimpse2",
+    "label": "Education — Glimpse 2",
+    "type": "IMAGE",
+    "value": "/new/Education/glimse2.png",
+    "page": "activities/access-to-education",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.education.glimpse3",
+    "label": "Education — Glimpse 3",
+    "type": "IMAGE",
+    "value": "/new/Education/glimes3.png",
+    "page": "activities/access-to-education",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.education.glimpse4",
+    "label": "Education — Glimpse 4",
+    "type": "IMAGE",
+    "value": "/new/Education/glimes4.png",
+    "page": "activities/access-to-education",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.cloth.hero",
+    "label": "Cloth Distribution — Hero Image",
+    "type": "IMAGE",
+    "value": "/ClothDistribution/hero-banner.jpg",
+    "page": "activities/cloth-distribution",
+    "section": "Hero"
+  },
+  {
+    "key": "activities.cloth.glimpse1",
+    "label": "Cloth Distribution — Glimpse 1",
+    "type": "IMAGE",
+    "value": "/ClothDistribution/Glimpses1.jpeg",
+    "page": "activities/cloth-distribution",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.cloth.glimpse2",
+    "label": "Cloth Distribution — Glimpse 2",
+    "type": "IMAGE",
+    "value": "/ClothDistribution/Glimpses2.jpeg",
+    "page": "activities/cloth-distribution",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.cloth.glimpse3",
+    "label": "Cloth Distribution — Glimpse 3",
+    "type": "IMAGE",
+    "value": "/ClothDistribution/Glimpses3.jpeg",
+    "page": "activities/cloth-distribution",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.cloth.glimpse4",
+    "label": "Cloth Distribution — Glimpse 4",
+    "type": "IMAGE",
+    "value": "/ClothDistribution/Glimpses4.jpeg",
+    "page": "activities/cloth-distribution",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.youth.slider1",
+    "label": "Youth Welfare — Slider Image 1",
+    "type": "IMAGE",
+    "value": "/new/Youth/Slider.png",
+    "page": "activities/youth-welfare-centers",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.youth.slider2",
+    "label": "Youth Welfare — Slider Image 2",
+    "type": "IMAGE",
+    "value": "/new/Youth/slider2.png",
+    "page": "activities/youth-welfare-centers",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.youth.slider3",
+    "label": "Youth Welfare — Slider Image 3",
+    "type": "IMAGE",
+    "value": "/new/Youth/Slider3.png",
+    "page": "activities/youth-welfare-centers",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.wellness.slider1",
+    "label": "Mental Wellness — Slider Image 1",
+    "type": "IMAGE",
+    "value": "/new/wellness/Slider.png",
+    "page": "activities/mental-wellness-program",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.wellness.slider2",
+    "label": "Mental Wellness — Slider Image 2",
+    "type": "IMAGE",
+    "value": "/new/wellness/Slider2.png",
+    "page": "activities/mental-wellness-program",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.wellness.slider3",
+    "label": "Mental Wellness — Slider Image 3",
+    "type": "IMAGE",
+    "value": "/new/wellness/Slider3.png",
+    "page": "activities/mental-wellness-program",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.wellness.ourfocus",
+    "label": "Mental Wellness — Our Focus Image",
+    "type": "IMAGE",
+    "value": "/new/wellness/Ourfocus.png",
+    "page": "activities/mental-wellness-program",
+    "section": "Our Focus"
+  },
+  {
+    "key": "activities.wellness.whatwedo",
+    "label": "Mental Wellness — What We Do Image",
+    "type": "IMAGE",
+    "value": "/new/wellness/WhatWeDo.png",
+    "page": "activities/mental-wellness-program",
+    "section": "What We Do"
+  },
+  {
+    "key": "activities.women.slider1",
+    "label": "Women Empowerment — Slider Image 1",
+    "type": "IMAGE",
+    "value": "/new/Women/Slider.png",
+    "page": "activities/women-empowerment",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.skill.slider1",
+    "label": "Skill Development — Slider Image 1",
+    "type": "IMAGE",
+    "value": "/SkillDev/Slider.png",
+    "page": "activities/skill-development",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.skill.slider2",
+    "label": "Skill Development — Slider Image 2",
+    "type": "IMAGE",
+    "value": "/SkillDev/Slider2.png",
+    "page": "activities/skill-development",
+    "section": "Hero Slider"
+  },
+  {
+    "key": "activities.skill.ourfocus",
+    "label": "Skill Development — Our Focus Image",
+    "type": "IMAGE",
+    "value": "/SkillDev/OurFocus.png",
+    "page": "activities/skill-development",
+    "section": "Our Focus"
+  },
+  {
+    "key": "activities.skill.whatwedo",
+    "label": "Skill Development — What We Do Image",
+    "type": "IMAGE",
+    "value": "/SkillDev/WHATWeDo.png",
+    "page": "activities/skill-development",
+    "section": "What We Do"
+  },
+  {
+    "key": "activities.skill.glimpse1",
+    "label": "Skill Development — Glimpse 1",
+    "type": "IMAGE",
+    "value": "/SkillDev/glimes.png",
+    "page": "activities/skill-development",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.skill.glimpse2",
+    "label": "Skill Development — Glimpse 2",
+    "type": "IMAGE",
+    "value": "/SkillDev/glimes2.png",
+    "page": "activities/skill-development",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.skill.glimpse3",
+    "label": "Skill Development — Glimpse 3",
+    "type": "IMAGE",
+    "value": "/SkillDev/glimes3.png",
+    "page": "activities/skill-development",
+    "section": "Glimpses"
+  },
+  {
+    "key": "activities.skill.glimpse4",
+    "label": "Skill Development — Glimpse 4",
+    "type": "IMAGE",
+    "value": "/SkillDev/glimes4.png",
+    "page": "activities/skill-development",
+    "section": "Glimpses"
+  }
+]

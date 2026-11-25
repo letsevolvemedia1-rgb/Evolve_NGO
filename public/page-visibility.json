@@ -1,0 +1,70 @@
+{
+  "home": {
+    "label": "Home",
+    "enabled": true
+  },
+  "about-us": {
+    "label": "About Us",
+    "enabled": true
+  },
+  "activities/access-to-education": {
+    "label": "Activities — Access to Education",
+    "enabled": true
+  },
+  "activities/cloth-distribution": {
+    "label": "Activities — Cloth Distribution",
+    "enabled": true
+  },
+  "activities/environment-care": {
+    "label": "Activities — Environment Care",
+    "enabled": true
+  },
+  "activities/free-food-drive": {
+    "label": "Activities — Free Food Drive",
+    "enabled": true
+  },
+  "activities/mental-wellness-program": {
+    "label": "Activities — Mental Wellness Program",
+    "enabled": true
+  },
+  "activities/skill-development": {
+    "label": "Activities — Skill Development",
+    "enabled": true
+  },
+  "activities/value-education-program": {
+    "label": "Activities — Value Education Program",
+    "enabled": true
+  },
+  "activities/women-empowerment": {
+    "label": "Activities — Women Empowerment",
+    "enabled": true
+  },
+  "activities/youth-welfare-centers": {
+    "label": "Activities — Youth Welfare Centers",
+    "enabled": true
+  },
+  "south-india-tour": {
+    "label": "South India Tour",
+    "enabled": true
+  },
+  "south-india-yatra": {
+    "label": "South India Yatra",
+    "enabled": true
+  },
+  "support-a-cause": {
+    "label": "Support a Cause",
+    "enabled": true
+  },
+  "contact-us": {
+    "label": "Contact Us",
+    "enabled": true
+  },
+  "join-us": {
+    "label": "Join Us",
+    "enabled": true
+  },
+  "heritage-walk": {
+    "label": "Heritage Walk",
+    "enabled": true
+  }
+}
